@@ -15,7 +15,12 @@
     "next": "13.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "styled-components": "^5.3.8"
+    "react-hook-form": "^7.43.5",
+    "react-icons": "^4.8.0",
+    "react-native-linear-gradient": "^2.6.2",
+    "react-use": "^17.4.0",
+    "styled-components": "^5.3.8",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.5.1",
