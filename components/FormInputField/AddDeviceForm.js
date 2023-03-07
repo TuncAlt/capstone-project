@@ -34,14 +34,6 @@ const StyledError = styled.p`
   border-radius: 16px;
 `;
 
-const StyledSuccess = styled.p`
-  display: flex;
-  align-items: center;
-  color: white;
-  background-color: green;
-  padding: 5px;
-  border-radius: 5px;
-`;
 const StyledSubmit = styled.p`
   display: flex;
   align-items: center;
@@ -106,6 +98,9 @@ export default function AddDeviceForm() {
       </StyledLabel>
       <StyledLabel>
         <select {...register("type", { required: true })}>
+          <option value="Please Select Device" disabled selected>
+            Please Select Device
+          </option>
           <option value="Refrigerator">Refrigerator</option>
           <option value="Freezer">Freezer</option>
           <option value="Prep Table">Prep Table</option>
