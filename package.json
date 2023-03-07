@@ -10,6 +10,7 @@
     "test": "jest --watchAll"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.9.11",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
     "next": "13.2.3",
@@ -17,10 +18,10 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.5",
     "react-icons": "^4.8.0",
-    "react-native-linear-gradient": "^2.6.2",
-    "react-use": "^17.4.0",
     "styled-components": "^5.3.8",
-    "uuid": "^9.0.0"
+    "uid": "^2.0.1",
+    "use-local-storage": "^2.3.6",
+    "use-local-storage-state": "^18.2.1"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.5.1",
