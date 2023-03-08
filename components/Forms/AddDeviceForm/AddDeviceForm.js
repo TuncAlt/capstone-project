@@ -134,7 +134,7 @@ export default function AddDeviceForm() {
   const [submitMessage, setSubmitMessage] = useState(false);
   const [isAutomatic, setIsAutomatic] = useState(false);
   const [devices, setDevices] = useLocalStorageState("devices", {
-    defaultValue: [""],
+    defaultValue: [],
   });
   //register stores value from each input field in data, has a handleSubmit Function and error handling
   const {

@@ -85,7 +85,7 @@ const StyledSelectField = styled.select`
 export default function LogTemperatureForm() {
   const [submitMessage, setSubmitMessage] = useState(false);
   const [devices, setDevices] = useLocalStorageState("devices", {
-    defaultValue: [""],
+    defaultValue: [],
   });
   const {
     register,
@@ -131,7 +131,7 @@ export default function LogTemperatureForm() {
               <option value="" disabled selected>
                 Select a device
               </option>
-              {devices.map((device, index) => (
+              {devices?.map((device, index) => (
                 <option key={index} value={device.name}>
                   {device.name}
                 </option>
