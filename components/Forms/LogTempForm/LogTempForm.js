@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import useLocalStorageState from "use-local-storage-state";
 import styled from "styled-components";
 import { useState } from "react";
+import AddFormHeader from "@/components/Navigation/HeaderNavigation";
 
 // STYLING
 const StyledWrapper = styled.div`
@@ -121,44 +122,54 @@ export default function LogTemperatureForm() {
   };
 
   return (
-    <StyledWrapper>
-      <StyledFormContainer onSubmit={handleSubmit(onSubmit)}>
-        <StyledLabel>
-          <StyledSelectField {...register("device", { required: true })}>
-            <option value="" disabled selected>
-              Select a device
-            </option>
-            {devices.map((device, index) => (
-              <option key={index} value={device.name}>
-                {device.name}
+    <>
+      <AddFormHeader />
+      <StyledWrapper>
+        <StyledFormContainer onSubmit={handleSubmit(onSubmit)}>
+          <StyledLabel>
+            <StyledSelectField {...register("device", { required: true })}>
+              <option value="" disabled selected>
+                Select a device
               </option>
-            ))}
-          </StyledSelectField>
-          {errors.device && <StyledError>Please select a device</StyledError>}
-        </StyledLabel>
+              {devices.map((device, index) => (
+                <option key={index} value={device.name}>
+                  {device.name}
+                </option>
+              ))}
+            </StyledSelectField>
+            {errors.device && <StyledError>Please select a device</StyledError>}
+          </StyledLabel>
 
-        <StyledLabel>
-          <StyledInput type="date" {...register("date", { required: true })} />
-          {errors.date && <StyledError>Please select a date</StyledError>}
-        </StyledLabel>
+          <StyledLabel>
+            <StyledInput
+              type="date"
+              {...register("date", { required: true })}
+            />
+            {errors.date && <StyledError>Please select a date</StyledError>}
+          </StyledLabel>
 
-        <StyledLabel>
-          <StyledInput
-            type="number"
-            placeholder="Temperature"
-            {...register("temperature", { required: true, min: -25, max: 25 })}
-          />
-          {errors.temperature && (
-            <StyledError>Please enter a temperature</StyledError>
+          <StyledLabel>
+            <StyledInput
+              type="number"
+              placeholder="Temperature"
+              {...register("temperature", {
+                required: true,
+                min: -25,
+                max: 25,
+              })}
+            />
+            {errors.temperature && (
+              <StyledError>Please enter a temperature</StyledError>
+            )}
+          </StyledLabel>
+
+          <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
+
+          {submitMessage && (
+            <StyledSubmit>Temperature reading successfully added!</StyledSubmit>
           )}
-        </StyledLabel>
-
-        <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
-
-        {submitMessage && (
-          <StyledSubmit>Temperature reading successfully added!</StyledSubmit>
-        )}
-      </StyledFormContainer>
-    </StyledWrapper>
+        </StyledFormContainer>
+      </StyledWrapper>
+    </>
   );
 }
