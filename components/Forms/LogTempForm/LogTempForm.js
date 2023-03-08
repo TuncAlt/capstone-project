@@ -6,8 +6,12 @@ import { useState } from "react";
 // STYLING
 const StyledWrapper = styled.div`
   position: relative;
-  background-image: url("your-background-image-here");
-  background-size: cover;
+  background: rgb(91, 105, 124);
+  background: linear-gradient(
+    0deg,
+    rgba(91, 105, 124, 1) 0%,
+    rgba(34, 90, 195, 1) 92%
+  );
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -20,9 +24,10 @@ const StyledFormContainer = styled.form`
   justify-content: center;
   align-items: center;
   align-content: center;
-  background-color: lightgrey;
+  background-color: glass-effect;
   padding: 20px;
   border-radius: 10px;
+  border: solid white 1px;
 `;
 
 const StyledLabel = styled.label`
