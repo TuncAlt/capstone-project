@@ -20,7 +20,6 @@
     "react-icons": "^4.8.0",
     "styled-components": "^5.3.8",
     "uid": "^2.0.1",
-    "use-local-storage": "^2.3.6",
     "use-local-storage-state": "^18.2.1"
   },
   "devDependencies": {
