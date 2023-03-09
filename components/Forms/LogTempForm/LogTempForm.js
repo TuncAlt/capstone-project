@@ -131,8 +131,8 @@ export default function LogTemperatureForm() {
               <option value="" disabled selected>
                 Select a device
               </option>
-              {devices?.map((device, index) => (
-                <option key={index} value={device.name}>
+              {devices?.map((device, id) => (
+                <option key={id} value={device.name}>
                   {device.name}
                 </option>
               ))}

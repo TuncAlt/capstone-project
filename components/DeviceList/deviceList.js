@@ -6,8 +6,8 @@ export default function DeviceList({ devices }) {
     <>
       <h1>Devices</h1>
       <ul>
-        {devices?.map((device, index) => (
-          <li key={index}>
+        {devices?.map((device, id) => (
+          <li key={id}>
             {device.name}{" "}
             {device.readings && device.readings.length > 0 ? (
               <>
