@@ -1,9 +1,9 @@
 import AddDeviceForm from "@/components/Forms/AddDeviceForm/AddDeviceForm";
 
-export default function addDeviceForm() {
+export default function addDeviceForm({ addDevice }) {
   return (
     <main>
-      <AddDeviceForm />
+      <AddDeviceForm addDevice={addDevice} />
     </main>
   );
 }

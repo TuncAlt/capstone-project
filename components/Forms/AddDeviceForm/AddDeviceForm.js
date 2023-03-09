@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
-import useLocalStorageState from "use-local-storage-state";
 import styled from "styled-components";
 import { useState } from "react";
 import HeaderNavigation from "@/components/Navigation/HeaderNavigation";
+import useLocalStorageDevices from "@/components/UseLocalStorage/UseLocalStorageDevices";
 
 //STYLING
 const StyledFormContainer = styled.form`
@@ -130,12 +130,10 @@ const CheckBox = styled.input`
 `;
 //FUNCTIONALITY
 
-export default function AddDeviceForm() {
+export default function AddDeviceForm({ addDevice }) {
   const [submitMessage, setSubmitMessage] = useState(false);
   const [isAutomatic, setIsAutomatic] = useState(false);
-  const [devices, setDevices] = useLocalStorageState("devices", {
-    defaultValue: [],
-  });
+
   //register stores value from each input field in data, has a handleSubmit Function and error handling
   const {
     register,
@@ -147,10 +145,10 @@ export default function AddDeviceForm() {
     setIsAutomatic(!isAutomatic);
   };
   // on Submit -> submitted data is stored in local storage,
-  //submitMessage is getting displayed for 3 sec. after that the form is getting resettet
+  //submitMessage is getting displayed for 3 sec. after that the form is getting resetet
   const onSubmit = (data, event) => {
     event.target.reset();
-    setDevices([...devices, data]);
+    addDevice(data);
     setSubmitMessage(true);
     setTimeout(() => setSubmitMessage(false), 3000);
   };
