@@ -1,18 +1,10 @@
-import { useState, useEffect } from "react";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function useLocalStorageDevices() {
-  const [devices, setDevices] = useState([]);
-
-  useEffect(() => {
-    const storedDevices = JSON.parse(localStorage.getItem("devices"));
-    if (storedDevices) {
-      setDevices(storedDevices);
-    }
-  }, []);
+  const [devices, setDevices] = useLocalStorageState("devices", []);
 
   const addDevice = (device) => {
     setDevices([...devices, device]);
-    localStorage.setItem("devices", JSON.stringify([...devices, device]));
   };
 
   return [devices, addDevice];
