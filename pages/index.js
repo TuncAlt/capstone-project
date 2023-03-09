@@ -1,4 +1,4 @@
-import LogTemperatureForm from "@/components/Forms/LogTempForm/LogTempForm";
+import AddDeviceForm from "@/components/Forms/AddDeviceForm/AddDeviceForm";
 import styled from "styled-components";
 
 const StyledButton = styled.button`
@@ -20,7 +20,7 @@ const StyledButtonContainer = styled.div`
 export default function Home() {
   return (
     <main>
-      <LogTemperatureForm />
+      <AddDeviceForm />
     </main>
   );
 }
