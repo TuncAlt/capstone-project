@@ -109,11 +109,10 @@ export default function DeviceList({ devices }) {
           devices.map((device) => (
             <StyledLinkContainer key={device.id}>
               <StyledTempLinkWrapper>
-                <StyledTempReading>
-                  {device.readings && device.readings.length > 0
-                    ? device.readings[1].temperature + "°C"
+                  {device.readings && device.readings.length > 0 ? <StyledTempReading>
+                  {device.readings[1].temperature + "°C"}
+                  </StyledTempReading>
                     : ""}
-                </StyledTempReading>
                 <StyledLink href={`/`}>
                   <StyledDeviceName>{device.name}</StyledDeviceName>
                 </StyledLink>
