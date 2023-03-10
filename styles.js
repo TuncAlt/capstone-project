@@ -4,11 +4,17 @@ export default createGlobalStyle`
   *,
   *::before,
   *::after {
-    box-sizing: border-box;
+    
   }
   body {
     margin: 0;
     font-family: system-ui;
-    background-color: #092B60;
+    box-sizing: border-box;
+    background: linear-gradient(
+      0deg,
+      rgba(91, 105, 124, 1) 0%,
+      rgba(34, 90, 195, 1) 92%
+    );
+   
   }
 `;
