@@ -119,9 +119,21 @@ export default function DeviceList({ devices }) {
                 </StyledLink>
               </StyledTempLinkWrapper>
               {device.readings && device.readings.length > 0 ? (
-                <StyledIconWrapper>
-                  <FaExclamationTriangle />
-                </StyledIconWrapper>
+                <>
+                  {Number(device.readings[1].temperature) >
+                  Number(device.maxTemp) ? (
+                    <StyledIconWrapper style={{ color: "red" }}>
+                      {" "}
+                      <FaExclamationTriangle />
+                    </StyledIconWrapper>
+                  ) : Number(device.readings[1].temperature) <
+                    Number(device.minTemp) ? (
+                    <StyledIconWrapper style={{ color: "red" }}>
+                      {" "}
+                      <FaExclamationTriangle />
+                    </StyledIconWrapper>
+                  ) : null}
+                </>
               ) : (
                 <StyledTempLink href="/logTempForm">
                   <StyledTempReading>
