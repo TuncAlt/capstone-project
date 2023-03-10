@@ -1,4 +1,4 @@
-import AddDeviceForm from "@/components/Forms/AddDeviceForm/AddDeviceForm";
+import DeviceList from "@/components/DeviceList/deviceList";
 import styled from "styled-components";
 
 const StyledButton = styled.button`
@@ -17,10 +17,10 @@ const StyledButtonContainer = styled.div`
   margin-top: 10px;
 `;
 
-export default function Home() {
+export default function Home({ devices }) {
   return (
     <main>
-      <AddDeviceForm />
+      <DeviceList devices={devices} />;
     </main>
   );
 }

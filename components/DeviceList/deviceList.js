@@ -5,7 +5,6 @@ import Link from "next/link";
 import styled from "styled-components";
 
 //Styling
-
 const StyledWrapper = styled.div`
   background: rgb(91, 105, 124);
   background: linear-gradient(
@@ -60,6 +59,21 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   color: white;
 `;
+const StyledAddLink = styled(Link)`
+  width: 60%;
+  height: 40%;
+  border-radius: 16px;
+  order: 2;
+  text-decoration: none;
+  color: white;
+  display: flex;
+  justify-content: center;
+  border: solid 1px white;
+  display: flex;
+  align-conten: center;
+  align-items: center;
+  text-align: center;
+`;
 
 const StyledTempLinkWrapper = styled.div`
   display: flex;
@@ -74,38 +88,56 @@ const StyledTempLink = styled(Link)`
   color: white;
 `;
 
-//FUNCTIONALITY
+const StyledHeader = styled.h1`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  top: 20px;
+  color: white;
+`;
+
+//Function
 
 export default function DeviceList({ devices }) {
   return (
     <>
-      <h1>Devices</h1>
+      <StyledHeader>Welcome</StyledHeader>
       <StyledWrapper>
-        {devices?.map((device) => (
-          <StyledLinkContainer key={device.id}>
-            <StyledTempLinkWrapper>
-              <StyledTempReading>
-                {device.readings && device.readings.length > 0
-                  ? device.readings[1].temperature + "°C"
-                  : ""}
-              </StyledTempReading>
-              <StyledLink href={`/devices/${device.id}`}>
-                <StyledDeviceName>{device.name}</StyledDeviceName>
-              </StyledLink>
-            </StyledTempLinkWrapper>
-            {device.readings && device.readings.length > 0 ? (
-              <StyledIconWrapper>
-                <FaExclamationTriangle />
-              </StyledIconWrapper>
-            ) : (
-              <StyledTempLink href="/logTempForm">
+        {devices?.length > 0 ? (
+          devices.map((device) => (
+            <StyledLinkContainer key={device.id}>
+              <StyledTempLinkWrapper>
                 <StyledTempReading>
-                  <MdAdd />
+                  {device.readings && device.readings.length > 0
+                    ? device.readings[1].temperature + "°C"
+                    : ""}
                 </StyledTempReading>
-              </StyledTempLink>
-            )}
-          </StyledLinkContainer>
-        ))}
+                <StyledLink href={`/`}>
+                  <StyledDeviceName>{device.name}</StyledDeviceName>
+                </StyledLink>
+              </StyledTempLinkWrapper>
+              {device.readings && device.readings.length > 0 ? (
+                <StyledIconWrapper>
+                  <FaExclamationTriangle />
+                </StyledIconWrapper>
+              ) : (
+                <StyledTempLink href="/logTempForm">
+                  <StyledTempReading>
+                    <MdAdd />
+                  </StyledTempReading>
+                </StyledTempLink>
+              )}
+            </StyledLinkContainer>
+          ))
+        ) : (
+          <StyledAddLink href="/addDeviceForm">
+            Oh it seems there is no Device added
+            <br />
+            Click to add a new device
+          </StyledAddLink>
+        )}
       </StyledWrapper>
     </>
   );
