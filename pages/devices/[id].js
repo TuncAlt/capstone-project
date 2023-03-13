@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { MdAdd } from "react-icons/md";
@@ -25,7 +26,17 @@ export default function Device({ devices }) {
   const router = useRouter();
   const { id } = router.query;
 
-  const device = devices.find((device) => device.id === id);
+  const [device, setDevice] = useState(null);
+
+  useEffect(() => {
+    const foundDevice = devices?.find((device) => device.id === id);
+    setDevice(foundDevice);
+  }, [devices, id]);
+
+  const handleAddClick = () => {
+    router.push(`/logTempForm?deviceId=${device.id}`);
+  };
+
   if (!device) {
     return null;
   }
@@ -38,11 +49,8 @@ export default function Device({ devices }) {
           {device.readings[device.readings.length - 1].temperature}°C
         </StyledDeviceTemperatureBox>
       ) : (
-        <StyledDeviceTemperatureBox>
-          <Link href="/logTempForm">
-            {" "}
-            <MdAdd />{" "}
-          </Link>
+        <StyledDeviceTemperatureBox onClick={handleAddClick}>
+          <MdAdd />
         </StyledDeviceTemperatureBox>
       )}
     </StyledDeviceContainer>
