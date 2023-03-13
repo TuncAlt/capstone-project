@@ -6,17 +6,19 @@ import styled from "styled-components";
 
 //Styling
 const StyledWrapper = styled.div`
-  background: rgb(91, 105, 124);
-  background: linear-gradient(
-    0deg,
-    rgba(91, 105, 124, 1) 0%,
-    rgba(34, 90, 195, 1) 92%
+  background: rgb(7, 42, 95);
+  background: radial-gradient(
+    circle,
+    rgba(7, 42, 95, 1) 0%,
+    rgba(227, 227, 227, 0) 100%
   );
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  width: 80%;
+  margin-left: 10%;
+  border-radius: 36px;
+  flex-wrap: wrap;
 `;
 
 const StyledLinkContainer = styled.div`
@@ -31,6 +33,7 @@ const StyledLinkContainer = styled.div`
   margin: 4px;
   width: 80%;
   height: 5%;
+  box-sizing: border-box;
 `;
 
 const StyledDeviceName = styled.h2`
@@ -68,7 +71,6 @@ const StyledAddLink = styled(Link)`
   color: white;
   display: flex;
   justify-content: center;
-  border: solid 1px white;
   display: flex;
   align-conten: center;
   align-items: center;
@@ -109,10 +111,13 @@ export default function DeviceList({ devices }) {
           devices.map((device) => (
             <StyledLinkContainer key={device.id}>
               <StyledTempLinkWrapper>
-                  {device.readings && device.readings.length > 0 ? <StyledTempReading>
-                  {device.readings[1].temperature + "°C"}
+                {device.readings && device.readings.length > 0 ? (
+                  <StyledTempReading>
+                    {device.readings[1].temperature + "°C"}
                   </StyledTempReading>
-                    : ""}
+                ) : (
+                  <StyledTempReading />
+                )}
                 <StyledLink href={`/`}>
                   <StyledDeviceName>{device.name}</StyledDeviceName>
                 </StyledLink>
@@ -144,7 +149,7 @@ export default function DeviceList({ devices }) {
           ))
         ) : (
           <StyledAddLink href="/addDeviceForm">
-            Oh it seems there is no Device added
+            Hello there!
             <br />
             Click to add a new device
           </StyledAddLink>

@@ -9,12 +9,6 @@ export default createGlobalStyle`
   body {
     margin: 0;
     font-family: system-ui;
-    box-sizing: border-box;
-    background: linear-gradient(
-      0deg,
-      rgba(91, 105, 124, 1) 0%,
-      rgba(34, 90, 195, 1) 92%
-    );
-   
-  }
+    background: rgb(227,227,227);
+background: radial-gradient(circle, rgba(227,227,227,0) 0%, rgba(7,42,95,1) 100%);
 `;
