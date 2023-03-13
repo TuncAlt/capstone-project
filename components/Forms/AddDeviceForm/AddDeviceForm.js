@@ -65,11 +65,11 @@ const StyledSelectField = styled.select`
 
 const StyledWrapper = styled.div`
   position: relative;
-  background: rgb(91, 105, 124);
-  background: linear-gradient(
-    0deg,
-    rgba(91, 105, 124, 1) 0%,
-    rgba(34, 90, 195, 1) 92%
+  background: rgb(7, 42, 95);
+  background: radial-gradient(
+    circle,
+    rgba(7, 42, 95, 1) 0%,
+    rgba(227, 227, 227, 0) 100%
   );
   height: 100vh;
   display: flex;

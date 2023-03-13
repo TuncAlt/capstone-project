@@ -4,11 +4,11 @@ export default createGlobalStyle`
   *,
   *::before,
   *::after {
-    box-sizing: border-box;
+    
   }
   body {
     margin: 0;
     font-family: system-ui;
-    background-color: #092B60;
-  }
+    background: rgb(227,227,227);
+background: radial-gradient(circle, rgba(227,227,227,0) 0%, rgba(7,42,95,1) 100%);
 `;

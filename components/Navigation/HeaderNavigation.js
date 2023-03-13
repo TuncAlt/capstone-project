@@ -8,7 +8,7 @@ const StyledLinkContainer = styled.div`
   align-items: center;
   text-align: center;
   width: 80%;
-  top: 0;
+  margin: 0 auto;
 `;
 
 const StyledAddDeviceLink = styled(Link)`

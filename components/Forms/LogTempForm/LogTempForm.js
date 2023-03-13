@@ -7,11 +7,11 @@ import AddFormHeader from "@/components/Navigation/HeaderNavigation";
 // STYLING
 const StyledWrapper = styled.div`
   position: relative;
-  background: rgb(91, 105, 124);
-  background: linear-gradient(
-    0deg,
-    rgba(91, 105, 124, 1) 0%,
-    rgba(34, 90, 195, 1) 92%
+  background: rgb(7, 42, 95);
+  background: radial-gradient(
+    circle,
+    rgba(7, 42, 95, 1) 0%,
+    rgba(227, 227, 227, 0) 100%
   );
   height: 100vh;
   display: flex;
@@ -63,12 +63,13 @@ const StyledSubmit = styled.p`
   background-color: green;
   padding: 5px;
   border-radius: 5px;
+  width: 100%;
 `;
 
 const StyledSubmitButton = styled.button`
   margin: 10px;
   padding: 10px;
-  width: 220px;
+  width: 240px;
   border-radius: 16px;
   position: relative;
 `;
@@ -76,7 +77,7 @@ const StyledSubmitButton = styled.button`
 const StyledSelectField = styled.select`
   margin: 10px;
   padding: 10px;
-  width: 220px;
+  width: 240px;
   border-radius: 16px;
   position: relative;
 `;
@@ -98,7 +99,7 @@ export default function LogTemperatureForm() {
     event.target.reset();
     // find the index of the selected device
     const deviceIndex = devices.findIndex(
-      (device) => device.name === data.device
+      (device) => device.id === data.device
     );
 
     // selecting device and updating readings array with date and temp
@@ -131,8 +132,8 @@ export default function LogTemperatureForm() {
               <option value="" disabled selected>
                 Select a device
               </option>
-              {devices?.map((device, index) => (
-                <option key={index} value={device.name}>
+              {devices?.map((device) => (
+                <option key={device.id} value={device.id}>
                   {device.name}
                 </option>
               ))}
