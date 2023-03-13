@@ -5,7 +5,7 @@ import Link from "next/link";
 import styled from "styled-components";
 
 //Styling
-const StyledWrapper = styled.div`
+export const StyledWrapper = styled.div`
   background: rgb(7, 42, 95);
   background: radial-gradient(
     circle,
@@ -116,7 +116,7 @@ export default function DeviceList({ devices }) {
                 ) : (
                   <StyledTempReading />
                 )}
-                <StyledLink href={`/`}>
+                <StyledLink href={`/devices/${device.id}`}>
                   <StyledDeviceName>{device.name}</StyledDeviceName>
                 </StyledLink>
               </StyledTempLinkWrapper>
