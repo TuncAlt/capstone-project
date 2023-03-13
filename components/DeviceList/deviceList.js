@@ -52,7 +52,6 @@ const StyledIconWrapper = styled.span`
   color: red;
   font-size: 24px;
   order: 3;
-  color: white;
 `;
 
 const StyledLink = styled(Link)`
@@ -84,10 +83,9 @@ const StyledTempLinkWrapper = styled.div`
   width: 100%;
 `;
 const StyledTempLink = styled(Link)`
-  color: red;
+  color: ${({ color }) => color};
   font-size: 24px;
   order: 3;
-  color: white;
 `;
 
 const StyledHeader = styled.h1`
@@ -126,13 +124,13 @@ export default function DeviceList({ devices }) {
                 <>
                   {Number(device.readings[1].temperature) >
                   Number(device.maxTemp) ? (
-                    <StyledIconWrapper style={{ color: "red" }}>
+                    <StyledIconWrapper>
                       {" "}
                       <FaExclamationTriangle />
                     </StyledIconWrapper>
                   ) : Number(device.readings[1].temperature) <
                     Number(device.minTemp) ? (
-                    <StyledIconWrapper style={{ color: "red" }}>
+                    <StyledIconWrapper>
                       {" "}
                       <FaExclamationTriangle />
                     </StyledIconWrapper>
