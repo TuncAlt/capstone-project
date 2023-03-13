@@ -5,7 +5,7 @@ import Link from "next/link";
 import styled from "styled-components";
 
 //Styling
-export const StyledWrapper = styled.div`
+const StyledWrapper = styled.div`
   background: rgb(7, 42, 95);
   background: radial-gradient(
     circle,
