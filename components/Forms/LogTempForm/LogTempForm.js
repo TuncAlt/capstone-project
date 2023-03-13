@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
 import useLocalStorageState from "use-local-storage-state";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddFormHeader from "@/components/Navigation/HeaderNavigation";
+import { useRouter } from "next/router";
 
 // STYLING
 const StyledWrapper = styled.div`
@@ -84,15 +85,23 @@ const StyledSelectField = styled.select`
 
 // FUNCTIONALITY
 export default function LogTemperatureForm() {
+  const router = useRouter();
+  const { deviceId } = router.query;
+  const [device, setDevice] = useState(null);
   const [submitMessage, setSubmitMessage] = useState(false);
   const [devices, setDevices] = useLocalStorageState("devices", {
     defaultValue: [],
   });
+  useEffect(() => {}, [deviceId]);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      date: new Date().toISOString().substr(0, 10),
+    },
+  });
 
   // On submit, add the temperature reading to the device's readings array
   const onSubmit = (data, event) => {
@@ -128,7 +137,10 @@ export default function LogTemperatureForm() {
       <StyledWrapper>
         <StyledFormContainer onSubmit={handleSubmit(onSubmit)}>
           <StyledLabel>
-            <StyledSelectField {...register("device", { required: true })}>
+            <StyledSelectField
+              {...register("device", { required: true })}
+              defaultValue={deviceId}
+            >
               <option value="" disabled selected>
                 Select a device
               </option>

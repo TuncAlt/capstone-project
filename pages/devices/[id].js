@@ -45,7 +45,7 @@ export default function Device({ devices }) {
     <StyledDeviceContainer>
       <h1>{device.name}</h1>
       {device?.readings?.length > 0 ? (
-        <StyledDeviceTemperatureBox>
+        <StyledDeviceTemperatureBox onClick={handleAddClick}>
           {device.readings[device.readings.length - 1].temperature}°C
         </StyledDeviceTemperatureBox>
       ) : (
