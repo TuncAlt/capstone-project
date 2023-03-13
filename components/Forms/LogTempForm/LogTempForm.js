@@ -128,10 +128,7 @@ export default function LogTemperatureForm() {
       <StyledWrapper>
         <StyledFormContainer onSubmit={handleSubmit(onSubmit)}>
           <StyledLabel>
-            <StyledSelectField
-              {...register("device", { required: true })}
-              value={selectedDeviceId}
-            >
+            <StyledSelectField {...register("device", { required: true })}>
               <option value="" disabled selected>
                 Select a device
               </option>
