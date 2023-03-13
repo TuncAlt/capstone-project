@@ -26,12 +26,7 @@ export default function Device({ devices }) {
   const router = useRouter();
   const { id } = router.query;
 
-  const [device, setDevice] = useState(null);
-
-  useEffect(() => {
-    const foundDevice = devices?.find((device) => device.id === id);
-    setDevice(foundDevice);
-  }, [devices, id]);
+  const device = devices?.find((device) => device.id === id);
 
   const handleAddClick = () => {
     router.push(`/logTempForm?deviceId=${device.id}`);
