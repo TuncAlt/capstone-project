@@ -1,3 +1,4 @@
+import LineChart from "@/components/Chart/chart";
 import FooterNavBar from "@/components/Navigation/FooterNavBar/FooterNavBar";
 import useLocalStorageDevices from "@/components/UseLocalStorage/UseLocalStorageDevices";
 import GlobalStyle from "@/styles";
