@@ -112,13 +112,19 @@ export default function LogTemperatureForm() {
     );
 
     // selecting device and updating readings array with date and temp
+    if (!Array.isArray(devices[deviceIndex].readings)) {
+      devices[deviceIndex].readings = [];
+    }
+
     const updatedDevice = {
       ...devices[deviceIndex],
+
       readings: [
-        devices[deviceIndex].readings,
+        ...devices[deviceIndex].readings,
         { date: data.date, temperature: data.temperature },
       ],
     };
+
     //slice is used to create a new array that includes all devices
     //up to index of the device that is getting updated
     //after that it getting passed to setDevices and updates the state devices

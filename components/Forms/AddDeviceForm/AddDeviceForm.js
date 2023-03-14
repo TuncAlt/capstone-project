@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { useState } from "react";
 import HeaderNavigation from "@/components/Navigation/HeaderNavigation";
-import useLocalStorageDevices from "@/components/UseLocalStorage/UseLocalStorageDevices";
 
 //STYLING
 const StyledFormContainer = styled.form`

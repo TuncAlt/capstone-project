@@ -15,7 +15,8 @@ const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 80vw;
+  height: 75vh;
   margin-left: 10%;
   border-radius: 36px;
   flex-wrap: wrap;
@@ -30,7 +31,6 @@ const StyledLinkContainer = styled.div`
   padding: 20px;
   border-radius: 10px;
   border: solid white 1px;
-  margin: 4px;
   width: 80%;
   height: 5%;
   box-sizing: border-box;
@@ -109,9 +109,10 @@ export default function DeviceList({ devices }) {
           devices.map((device) => (
             <StyledLinkContainer key={device.id}>
               <StyledTempLinkWrapper>
-                {device.readings && device.readings.length > 0 ? (
+                {device?.readings &&
+                device.readings[device.readings.length - 1].temperature > 0 ? (
                   <StyledTempReading>
-                    {device.readings[1].temperature + "°C"}
+                    {device.readings[device.readings.length - 1].temperature}°C
                   </StyledTempReading>
                 ) : (
                   <StyledTempReading />
@@ -120,15 +121,16 @@ export default function DeviceList({ devices }) {
                   <StyledDeviceName>{device.name}</StyledDeviceName>
                 </StyledLink>
               </StyledTempLinkWrapper>
-              {device.readings && device.readings.length > 0 ? (
+              {device?.readings &&
+              device.readings[device.readings.length - 1].temperature > 0 ? (
                 <>
-                  {Number(device.readings[1].temperature) >
+                  {Number(device?.readings?.temperature) >
                   Number(device.maxTemp) ? (
                     <StyledIconWrapper>
                       {" "}
                       <FaExclamationTriangle />
                     </StyledIconWrapper>
-                  ) : Number(device.readings[1].temperature) <
+                  ) : Number(device?.readings?.temperature) <
                     Number(device.minTemp) ? (
                     <StyledIconWrapper>
                       {" "}

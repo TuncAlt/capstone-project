@@ -6,7 +6,7 @@ export default function useLocalStorageDevices() {
 
   const addDevice = (device) => {
     const newDevice = { ...device, id: uid() };
-    setDevices([...devices, newDevice]);
+    setDevices(devices ? [...devices, newDevice] : [newDevice]);
   };
 
   return [devices, addDevice];
