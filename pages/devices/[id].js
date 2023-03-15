@@ -17,6 +17,7 @@ const StyledDeviceContainer = styled.div`
   margin-left: 10%;
   border-radius: 36px;
   flex-direction: column;
+  position: relative;
 `;
 const StyledHeader = styled.h1`
   width: 80%;
@@ -30,8 +31,10 @@ const StyledHeader = styled.h1`
   border-radius: 16px;
 `;
 const StyledDeviceTemperatureBox = styled.div`
-  width: 84px;
-  height: 84px;
+  position: absolute;
+  top: 26px;
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
   background-color: #f0f0f0;
   display: flex;
@@ -42,6 +45,7 @@ const StyledDeviceTemperatureBox = styled.div`
   margin-bottom: 20px;
 `;
 
+const StyledTableBox = styled.div``;
 const StyledTable = styled.table`
   width: 100%;
   height: 60%;
@@ -56,7 +60,6 @@ const StyledTable = styled.table`
     color: white;
   }
 `;
-const StyledTableBox = styled.div``;
 export default function Device({ devices }) {
   const router = useRouter();
   const { id } = router.query;
@@ -65,6 +68,7 @@ export default function Device({ devices }) {
   const readings = device?.readings || [];
 
   const lastFiveReadings = readings.slice(-5).reverse();
+
   const handleAddClick = () => {
     router.push(`/logTempForm?deviceId=${device.id}`);
   };

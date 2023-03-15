@@ -32,7 +32,7 @@ const StyledLinkContainer = styled.div`
   border-radius: 10px;
   border: solid white 1px;
   width: 80%;
-  height: 5%;
+  height: 12%;
   box-sizing: border-box;
 `;
 
