@@ -15,7 +15,8 @@ const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 80vw;
+  height: 75vh;
   margin-left: 10%;
   border-radius: 36px;
   flex-wrap: wrap;
@@ -26,14 +27,12 @@ const StyledLinkContainer = styled.div`
   justify-content: center;
   align-items: center;
   align-content: center;
-  background-color: glass-effect;
-  padding: 20px;
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 5px;
+  border-radius: 16px;
   border: solid white 1px;
-  margin: 4px;
   width: 80%;
-  height: 5%;
-  box-sizing: border-box;
+  height: 10%;
 `;
 
 const StyledDeviceName = styled.h2`
@@ -109,26 +108,28 @@ export default function DeviceList({ devices }) {
           devices.map((device) => (
             <StyledLinkContainer key={device.id}>
               <StyledTempLinkWrapper>
-                {device.readings && device.readings.length > 0 ? (
+                {device?.readings &&
+                device.readings[device.readings.length - 1].temperature > 0 ? (
                   <StyledTempReading>
-                    {device.readings[1].temperature + "°C"}
+                    {device.readings[device.readings.length - 1].temperature}°C
                   </StyledTempReading>
                 ) : (
                   <StyledTempReading />
                 )}
-                <StyledLink href={`/`}>
+                <StyledLink href={`/devices/${device.id}`}>
                   <StyledDeviceName>{device.name}</StyledDeviceName>
                 </StyledLink>
               </StyledTempLinkWrapper>
-              {device.readings && device.readings.length > 0 ? (
+              {device?.readings &&
+              device.readings[device.readings.length - 1].temperature > 0 ? (
                 <>
-                  {Number(device.readings[1].temperature) >
+                  {Number(device?.readings?.temperature) >
                   Number(device.maxTemp) ? (
                     <StyledIconWrapper>
                       {" "}
                       <FaExclamationTriangle />
                     </StyledIconWrapper>
-                  ) : Number(device.readings[1].temperature) <
+                  ) : Number(device?.readings?.temperature) <
                     Number(device.minTemp) ? (
                     <StyledIconWrapper>
                       {" "}
