@@ -98,11 +98,7 @@ export default function LogTemperatureForm() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      date: new Date().toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      }),
+      date: new Date().toISOString().substr(0, 10),
     },
   });
 
