@@ -1,5 +1,6 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { MdAdd } from "react-icons/md";
+import { MdAdd, MdEdit, MdSettings } from "react-icons/md";
 import styled from "styled-components";
 
 const StyledDeviceContainer = styled.div`
@@ -30,7 +31,7 @@ const StyledHeader = styled.h1`
   margin-left: 10%;
   border-radius: 16px;
 `;
-const StyledDeviceTemperatureBox = styled.div`
+const StyledDeviceTemperatureBox = styled.button`
   position: absolute;
   top: 26px;
   width: 92px;
@@ -60,6 +61,7 @@ const StyledTable = styled.table`
     color: white;
   }
 `;
+
 export default function Device({ devices }) {
   const router = useRouter();
   const { id } = router.query;
@@ -80,6 +82,7 @@ export default function Device({ devices }) {
   return (
     <>
       <StyledHeader>{device.name}</StyledHeader>
+
       <StyledDeviceContainer>
         {device?.readings?.length > 0 ? (
           <>

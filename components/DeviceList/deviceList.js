@@ -27,13 +27,12 @@ const StyledLinkContainer = styled.div`
   justify-content: center;
   align-items: center;
   align-content: center;
-  background-color: glass-effect;
-  padding: 20px;
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 5px;
+  border-radius: 16px;
   border: solid white 1px;
   width: 80%;
-  height: 12%;
-  box-sizing: border-box;
+  height: 10%;
 `;
 
 const StyledDeviceName = styled.h2`
