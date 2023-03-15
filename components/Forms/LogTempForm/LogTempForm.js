@@ -87,7 +87,6 @@ const StyledSelectField = styled.select`
 export default function LogTemperatureForm() {
   const router = useRouter();
   const { deviceId } = router.query;
-  const [device, setDevice] = useState(null);
   const [submitMessage, setSubmitMessage] = useState(false);
   const [devices, setDevices] = useLocalStorageState("devices", {
     defaultValue: [],
@@ -99,7 +98,11 @@ export default function LogTemperatureForm() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      date: new Date().toISOString().substr(0, 10),
+      date: new Date().toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }),
     },
   });
 
