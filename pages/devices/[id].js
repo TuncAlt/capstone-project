@@ -1,3 +1,4 @@
+import TemperatureEdit from "@/components/EditComponents/TemperatureEdit";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { MdAdd, MdEdit, MdSettings } from "react-icons/md";
@@ -61,6 +62,12 @@ const StyledTable = styled.table`
     color: white;
   }
 `;
+const StyledComponentBox = styled.div`
+  position: absolute;
+  margin-left: 95px;
+  margin-top: 65px;
+  z-index: 1;
+`;
 
 export default function Device({ devices }) {
   const router = useRouter();
@@ -82,6 +89,9 @@ export default function Device({ devices }) {
   return (
     <>
       <StyledHeader>{device.name}</StyledHeader>
+      <StyledComponentBox>
+        <TemperatureEdit device={device} />
+      </StyledComponentBox>
 
       <StyledDeviceContainer>
         {device?.readings?.length > 0 ? (
