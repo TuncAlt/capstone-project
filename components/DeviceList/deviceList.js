@@ -109,9 +109,11 @@ export default function DeviceList({ devices }) {
             <StyledLinkContainer key={device.id}>
               <StyledTempLinkWrapper>
                 {device?.readings &&
-                device.readings[device.readings.length - 1].temperature > 0 ? (
+                device?.readings[device?.readings?.length - 1]?.temperature >
+                  0 ? (
                   <StyledTempReading>
-                    {device.readings[device.readings.length - 1].temperature}°C
+                    {device.readings[device?.readings?.length - 1].temperature}
+                    °C
                   </StyledTempReading>
                 ) : (
                   <StyledTempReading />
@@ -121,7 +123,8 @@ export default function DeviceList({ devices }) {
                 </StyledLink>
               </StyledTempLinkWrapper>
               {device?.readings &&
-              device.readings[device.readings.length - 1].temperature > 0 ? (
+              device?.readings[device?.readings?.length - 1]?.temperature >
+                0 ? (
                 <>
                   {Number(device?.readings?.temperature) >
                   Number(device.maxTemp) ? (

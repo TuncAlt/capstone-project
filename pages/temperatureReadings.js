@@ -70,9 +70,10 @@ const StyledSearchInput = styled.input`
   margin-right: 10px;
 `;
 
-export default function TemperatureReadings({ devices }) {
+export default function TemperatureReadings({ devices, deleteReading }) {
   const router = useRouter();
   const { deviceId } = router.query;
+  const [searchTerm, setSearchTerm] = useState("");
 
   // find the device with matching deviceId
   const device = devices.find((device) => device.id === deviceId);
@@ -83,11 +84,12 @@ export default function TemperatureReadings({ devices }) {
   }
 
   // filter the readings based on deviceId
-  const [searchTerm, setSearchTerm] = useState("");
   const readings = device.readings.filter((reading) =>
     reading.date.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+  const handleDeleteReading = (deviceId, readingIndex) => {
+    deleteReading(deviceId, readingIndex);
+  };
   // render the list of readings with edit and delete functionality
   return (
     <>
@@ -110,7 +112,7 @@ export default function TemperatureReadings({ devices }) {
               </tr>
             </thead>
             <tbody>
-              {readings.map((reading) => (
+              {readings.map((reading, index) => (
                 <tr key={device.id}>
                   <td>{reading.date} </td>
                   <td>{reading.temperature}°C</td>
@@ -118,7 +120,9 @@ export default function TemperatureReadings({ devices }) {
                     <MdEdit />
                   </StyledButtonContainer>
                   <StyledButtonContainer>
-                    <MdDelete />
+                    <MdDelete
+                      onClick={() => handleDeleteReading(device.id, index)}
+                    />
                   </StyledButtonContainer>
                 </tr>
               ))}

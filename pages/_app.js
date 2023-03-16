@@ -5,14 +5,19 @@ import GlobalStyle from "@/styles";
 import Head from "next/head";
 
 export default function App({ Component, pageProps }) {
-  const [devices, addDevice] = useLocalStorageDevices();
+  const [devices, addDevice, deleteReading] = useLocalStorageDevices();
   return (
     <>
       <GlobalStyle />
       <Head>
         <title>Capstone Project</title>
       </Head>
-      <Component {...pageProps} devices={devices} addDevice={addDevice} />
+      <Component
+        {...pageProps}
+        devices={devices}
+        addDevice={addDevice}
+        deleteReading={deleteReading}
+      />
       <FooterNavBar />
     </>
   );
