@@ -76,7 +76,7 @@ export default function TemperatureReadings({ devices, deleteReading }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   // find the device with matching deviceId
-  const device = devices.find((device) => device.id === deviceId);
+  const device = devices?.find((device) => device.id === deviceId);
   console.log(device);
   // if device not found, render null
   if (!device) {
@@ -112,10 +112,10 @@ export default function TemperatureReadings({ devices, deleteReading }) {
               </tr>
             </thead>
             <tbody>
-              {readings.map((reading, index) => (
+              {readings?.map((reading, index) => (
                 <tr key={device.id}>
-                  <td>{reading.date} </td>
-                  <td>{reading.temperature}°C</td>
+                  <td>{reading?.date} </td>
+                  <td>{reading?.temperature}°C</td>
                   <StyledButtonContainer>
                     <MdEdit />
                   </StyledButtonContainer>
