@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { MdEdit, MdDelete } from "react-icons/md";
+import { MdEdit, MdDelete, MdCancel, MdSave } from "react-icons/md";
 import styled from "styled-components";
 
 const StyledButtonContainer = styled.button`
@@ -70,14 +70,19 @@ const StyledSearchInput = styled.input`
   margin-right: 10px;
 `;
 
-export default function TemperatureReadings({ devices, deleteReading }) {
+export default function TemperatureReadings({
+  devices,
+  deleteReading,
+  editReading,
+}) {
   const router = useRouter();
   const { deviceId } = router.query;
   const [searchTerm, setSearchTerm] = useState("");
+  const [editingReadingId, setEditingReadingId] = useState(null);
+  const [editedTemperature, setEditedTemperature] = useState("");
 
   // find the device with matching deviceId
   const device = devices?.find((device) => device.id === deviceId);
-  console.log(device);
   // if device not found, render null
   if (!device) {
     return null;
@@ -87,9 +92,28 @@ export default function TemperatureReadings({ devices, deleteReading }) {
   const readings = device.readings.filter((reading) =>
     reading.date.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  const handleDeleteReading = (deviceId, readingIndex) => {
-    deleteReading(deviceId, readingIndex);
+
+  const handleDeleteReading = (deviceId, readingId) => {
+    console.log("handleDelete:", deviceId, readingId);
+    deleteReading(deviceId, readingId);
   };
+
+  const handleEdit = (readingId, currentTemperature) => {
+    setEditingReadingId(readingId);
+    setEditedTemperature(currentTemperature);
+  };
+
+  const handleSave = (deviceId, readingId) => {
+    editReading(deviceId, readingId, editedTemperature);
+    setEditingReadingId(null);
+    setEditedTemperature("");
+  };
+
+  const handleCancel = () => {
+    setEditingReadingId(null);
+    setEditedTemperature("");
+  };
+
   // render the list of readings with edit and delete functionality
   return (
     <>
@@ -112,17 +136,48 @@ export default function TemperatureReadings({ devices, deleteReading }) {
               </tr>
             </thead>
             <tbody>
-              {readings?.map((reading, index) => (
-                <tr key={device.id}>
+              {readings?.map((reading) => (
+                <tr key={`${device.id}-${reading.id}`}>
                   <td>{reading?.date} </td>
-                  <td>{reading?.temperature}°C</td>
+                  <td>
+                    {editingReadingId === reading.id ? (
+                      <input
+                        type="number"
+                        value={editedTemperature}
+                        onChange={(event) =>
+                          setEditedTemperature(event.target.value)
+                        }
+                      />
+                    ) : (
+                      `${reading?.temperature}°C`
+                    )}
+                  </td>
+
                   <StyledButtonContainer>
-                    <MdEdit />
+                    {editingReadingId === reading.id ? (
+                      <button onClick={() => handleSave(device.id, reading.id)}>
+                        <MdSave />
+                      </button>
+                    ) : (
+                      <MdEdit
+                        onClick={() =>
+                          handleEdit(reading.id, reading.temperature)
+                        }
+                      />
+                    )}
                   </StyledButtonContainer>
                   <StyledButtonContainer>
-                    <MdDelete
-                      onClick={() => handleDeleteReading(device.id, index)}
-                    />
+                    {editingReadingId === reading.id ? (
+                      <button>
+                        <MdCancel onClick={handleCancel} />
+                      </button>
+                    ) : (
+                      <MdDelete
+                        onClick={() =>
+                          handleDeleteReading(device.id, reading.id)
+                        }
+                      />
+                    )}
                   </StyledButtonContainer>
                 </tr>
               ))}

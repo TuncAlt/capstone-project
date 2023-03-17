@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import AddFormHeader from "@/components/Navigation/HeaderNavigation";
 import { useRouter } from "next/router";
+import { uid } from "uid";
 
 // STYLING
 const StyledWrapper = styled.div`
@@ -120,7 +121,7 @@ export default function LogTemperatureForm() {
 
       readings: [
         ...devices[deviceIndex].readings,
-        { date: data.date, temperature: data.temperature },
+        { date: data.date, temperature: data.temperature, id: uid() },
       ],
     };
 

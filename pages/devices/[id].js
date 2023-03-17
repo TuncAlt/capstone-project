@@ -109,7 +109,7 @@ export default function Device({ devices }) {
                 </thead>
                 <tbody>
                   {lastFiveReadings.map((reading) => (
-                    <tr key={device.id}>
+                    <tr key={`${device.id}-${reading.id}`}>
                       <td>{reading.date}</td>
                       <td>{reading.temperature} °C</td>
                     </tr>

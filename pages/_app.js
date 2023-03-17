@@ -5,7 +5,8 @@ import GlobalStyle from "@/styles";
 import Head from "next/head";
 
 export default function App({ Component, pageProps }) {
-  const [devices, addDevice, deleteReading] = useLocalStorageDevices();
+  const [devices, addDevice, deleteReading, editReading] =
+    useLocalStorageDevices();
   return (
     <>
       <GlobalStyle />
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }) {
         devices={devices}
         addDevice={addDevice}
         deleteReading={deleteReading}
+        editReading={editReading}
       />
       <FooterNavBar />
     </>
