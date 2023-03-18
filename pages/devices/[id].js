@@ -20,6 +20,8 @@ const StyledDeviceContainer = styled.div`
   border-radius: 36px;
   flex-direction: column;
   position: relative;
+  flex: wrap;
+  overflow: auto;
 `;
 const StyledHeader = styled.h1`
   width: 80%;

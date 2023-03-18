@@ -5,6 +5,16 @@ import Link from "next/link";
 import styled from "styled-components";
 
 //Styling
+const StyledPageWrapper = styled.main`
+  background: rgb(7, 42, 95);
+  background: radial-gradient(
+    circle,
+    rgba(7, 42, 95, 1) 0%,
+    rgba(227, 227, 227, 0) 100%
+  );
+  height: 100vh;
+  width: 100vw;
+`;
 const StyledWrapper = styled.div`
   background: rgb(7, 42, 95);
   background: radial-gradient(
@@ -16,10 +26,12 @@ const StyledWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 80vw;
-  height: 75vh;
+  max-height: 75vh;
   margin-left: 10%;
   border-radius: 36px;
   flex-wrap: wrap;
+  position: absolute;
+  overflow: auto;
 `;
 
 const StyledLinkContainer = styled.div`
@@ -28,11 +40,13 @@ const StyledLinkContainer = styled.div`
   align-items: center;
   align-content: center;
   background: rgba(255, 255, 255, 0.6);
-  padding: 5px;
+  padding: 12px;
+  margin: 8px;
   border-radius: 16px;
   border: solid white 1px;
   width: 80%;
-  height: 10%;
+  height: 20%;
+  position: relative;
 `;
 
 const StyledDeviceName = styled.h2`
@@ -102,61 +116,66 @@ const StyledHeader = styled.h1`
 export default function DeviceList({ devices }) {
   return (
     <>
-      <StyledHeader>Welcome</StyledHeader>
-      <StyledWrapper>
-        {devices?.length > 0 ? (
-          devices.map((device) => (
-            <StyledLinkContainer key={device.id}>
-              <StyledTempLinkWrapper>
+      <StyledPageWrapper>
+        <StyledHeader>Welcome</StyledHeader>
+        <StyledWrapper>
+          {devices?.length > 0 ? (
+            devices.map((device) => (
+              <StyledLinkContainer key={device.id}>
+                <StyledTempLinkWrapper>
+                  {device?.readings &&
+                  device?.readings[device?.readings?.length - 1]?.temperature >
+                    0 ? (
+                    <StyledTempReading>
+                      {
+                        device.readings[device?.readings?.length - 1]
+                          .temperature
+                      }
+                      °C
+                    </StyledTempReading>
+                  ) : (
+                    <StyledTempReading />
+                  )}
+                  <StyledLink href={`/devices/${device.id}`}>
+                    <StyledDeviceName>{device.name}</StyledDeviceName>
+                  </StyledLink>
+                </StyledTempLinkWrapper>
                 {device?.readings &&
                 device?.readings[device?.readings?.length - 1]?.temperature >
                   0 ? (
-                  <StyledTempReading>
-                    {device.readings[device?.readings?.length - 1].temperature}
-                    °C
-                  </StyledTempReading>
+                  <>
+                    {Number(device?.readings?.temperature) >
+                    Number(device.maxTemp) ? (
+                      <StyledIconWrapper>
+                        {" "}
+                        <FaExclamationTriangle />
+                      </StyledIconWrapper>
+                    ) : Number(device?.readings?.temperature) <
+                      Number(device.minTemp) ? (
+                      <StyledIconWrapper>
+                        {" "}
+                        <FaExclamationTriangle />
+                      </StyledIconWrapper>
+                    ) : null}
+                  </>
                 ) : (
-                  <StyledTempReading />
+                  <StyledTempLink href="/logTempForm">
+                    <StyledTempReading>
+                      <MdAdd />
+                    </StyledTempReading>
+                  </StyledTempLink>
                 )}
-                <StyledLink href={`/devices/${device.id}`}>
-                  <StyledDeviceName>{device.name}</StyledDeviceName>
-                </StyledLink>
-              </StyledTempLinkWrapper>
-              {device?.readings &&
-              device?.readings[device?.readings?.length - 1]?.temperature >
-                0 ? (
-                <>
-                  {Number(device?.readings?.temperature) >
-                  Number(device.maxTemp) ? (
-                    <StyledIconWrapper>
-                      {" "}
-                      <FaExclamationTriangle />
-                    </StyledIconWrapper>
-                  ) : Number(device?.readings?.temperature) <
-                    Number(device.minTemp) ? (
-                    <StyledIconWrapper>
-                      {" "}
-                      <FaExclamationTriangle />
-                    </StyledIconWrapper>
-                  ) : null}
-                </>
-              ) : (
-                <StyledTempLink href="/logTempForm">
-                  <StyledTempReading>
-                    <MdAdd />
-                  </StyledTempReading>
-                </StyledTempLink>
-              )}
-            </StyledLinkContainer>
-          ))
-        ) : (
-          <StyledAddLink href="/addDeviceForm">
-            Hello there!
-            <br />
-            Click to add a new device
-          </StyledAddLink>
-        )}
-      </StyledWrapper>
+              </StyledLinkContainer>
+            ))
+          ) : (
+            <StyledAddLink href="/addDeviceForm">
+              Hello there!
+              <br />
+              Click to add a new device
+            </StyledAddLink>
+          )}
+        </StyledWrapper>
+      </StyledPageWrapper>
     </>
   );
 }
