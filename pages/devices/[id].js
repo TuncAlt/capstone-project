@@ -1,15 +1,11 @@
+import TemperatureEdit from "@/components/EditComponents/TemperatureEdit";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { MdAdd, MdEdit, MdSettings } from "react-icons/md";
 import styled from "styled-components";
 
 const StyledDeviceContainer = styled.div`
-  background: rgb(7, 42, 95);
-  background: radial-gradient(
-    circle,
-    rgba(7, 42, 95, 1) 0%,
-    rgba(227, 227, 227, 0) 100%
-  );
+  background: #385170;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,6 +15,8 @@ const StyledDeviceContainer = styled.div`
   border-radius: 36px;
   flex-direction: column;
   position: relative;
+  flex: wrap;
+  overflow: auto;
 `;
 const StyledHeader = styled.h1`
   width: 80%;
@@ -26,7 +24,7 @@ const StyledHeader = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #072a5e;
+  background-color: #385170;
   color: white;
   margin-left: 10%;
   border-radius: 16px;
@@ -61,6 +59,12 @@ const StyledTable = styled.table`
     color: white;
   }
 `;
+const StyledComponentBox = styled.div`
+  position: absolute;
+  margin-left: 95px;
+  margin-top: 65px;
+  z-index: 1;
+`;
 
 export default function Device({ devices }) {
   const router = useRouter();
@@ -82,6 +86,9 @@ export default function Device({ devices }) {
   return (
     <>
       <StyledHeader>{device.name}</StyledHeader>
+      <StyledComponentBox>
+        <TemperatureEdit device={device} />
+      </StyledComponentBox>
 
       <StyledDeviceContainer>
         {device?.readings?.length > 0 ? (
@@ -99,7 +106,7 @@ export default function Device({ devices }) {
                 </thead>
                 <tbody>
                   {lastFiveReadings.map((reading) => (
-                    <tr key={device.id}>
+                    <tr key={`${device.id}-${reading.id}`}>
                       <td>{reading.date}</td>
                       <td>{reading.temperature} °C</td>
                     </tr>

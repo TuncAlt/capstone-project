@@ -6,12 +6,7 @@ import styled from "styled-components";
 
 //Styling
 const StyledWrapper = styled.div`
-  background: rgb(7, 42, 95);
-  background: radial-gradient(
-    circle,
-    rgba(7, 42, 95, 1) 0%,
-    rgba(227, 227, 227, 0) 100%
-  );
+  background: #385170;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,6 +15,8 @@ const StyledWrapper = styled.div`
   margin-left: 10%;
   border-radius: 36px;
   flex-wrap: wrap;
+  position: absolute;
+  overflow: auto;
 `;
 
 const StyledLinkContainer = styled.div`
@@ -28,11 +25,13 @@ const StyledLinkContainer = styled.div`
   align-items: center;
   align-content: center;
   background: rgba(255, 255, 255, 0.6);
-  padding: 5px;
+  padding: 12px;
+  margin: 8px;
   border-radius: 16px;
   border: solid white 1px;
   width: 80%;
   height: 10%;
+  position: relative;
 `;
 
 const StyledDeviceName = styled.h2`
@@ -109,9 +108,11 @@ export default function DeviceList({ devices }) {
             <StyledLinkContainer key={device.id}>
               <StyledTempLinkWrapper>
                 {device?.readings &&
-                device.readings[device.readings.length - 1].temperature > 0 ? (
+                device?.readings[device?.readings?.length - 1]?.temperature >
+                  0 ? (
                   <StyledTempReading>
-                    {device.readings[device.readings.length - 1].temperature}°C
+                    {device.readings[device?.readings?.length - 1].temperature}
+                    °C
                   </StyledTempReading>
                 ) : (
                   <StyledTempReading />
@@ -121,7 +122,8 @@ export default function DeviceList({ devices }) {
                 </StyledLink>
               </StyledTempLinkWrapper>
               {device?.readings &&
-              device.readings[device.readings.length - 1].temperature > 0 ? (
+              device?.readings[device?.readings?.length - 1]?.temperature >
+                0 ? (
                 <>
                   {Number(device?.readings?.temperature) >
                   Number(device.maxTemp) ? (

@@ -4,20 +4,20 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import AddFormHeader from "@/components/Navigation/HeaderNavigation";
 import { useRouter } from "next/router";
+import { uid } from "uid";
 
 // STYLING
 const StyledWrapper = styled.div`
-  position: relative;
-  background: rgb(7, 42, 95);
-  background: radial-gradient(
-    circle,
-    rgba(7, 42, 95, 1) 0%,
-    rgba(227, 227, 227, 0) 100%
-  );
-  height: 100vh;
+  background: #385170;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 80vw;
+  height: 75vh;
+  margin-left: 10%;
+  border-radius: 36px;
+  flex-direction: column;
+  position: relative;
 `;
 
 const StyledFormContainer = styled.form`
@@ -29,7 +29,6 @@ const StyledFormContainer = styled.form`
   background-color: glass-effect;
   padding: 20px;
   border-radius: 10px;
-  border: solid white 1px;
 `;
 
 const StyledLabel = styled.label`
@@ -83,6 +82,19 @@ const StyledSelectField = styled.select`
   position: relative;
 `;
 
+const StyledHeader = styled.h1`
+  width: 80%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #385170;
+  color: white;
+  margin-left: 10%;
+  border-radius: 16px;
+  font-size: 14px;
+  top: 20px;
+`;
 // FUNCTIONALITY
 export default function LogTemperatureForm() {
   const router = useRouter();
@@ -120,7 +132,7 @@ export default function LogTemperatureForm() {
 
       readings: [
         ...devices[deviceIndex].readings,
-        { date: data.date, temperature: data.temperature },
+        { date: data.date, temperature: data.temperature, id: uid() },
       ],
     };
 
@@ -138,7 +150,10 @@ export default function LogTemperatureForm() {
 
   return (
     <>
-      <AddFormHeader />
+      <StyledHeader>
+        <AddFormHeader />
+      </StyledHeader>
+
       <StyledWrapper>
         <StyledFormContainer onSubmit={handleSubmit(onSubmit)}>
           <StyledLabel>
