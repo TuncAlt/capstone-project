@@ -8,14 +8,9 @@ import { uid } from "uid";
 
 // STYLING
 const StyledWrapper = styled.div`
-  background: rgb(7, 42, 95);
-  background: radial-gradient(
-    circle,
-    rgba(7, 42, 95, 1) 0%,
-    rgba(227, 227, 227, 0) 100%
-  );
+  background: #385170;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   width: 80vw;
   height: 75vh;
@@ -34,7 +29,6 @@ const StyledFormContainer = styled.form`
   background-color: glass-effect;
   padding: 20px;
   border-radius: 10px;
-  border: solid white 1px;
 `;
 
 const StyledLabel = styled.label`
@@ -87,17 +81,20 @@ const StyledSelectField = styled.select`
   border-radius: 16px;
   position: relative;
 `;
-const StyledContentWrapper = styled.div`
-  height: 100vh;
-  width: 100vw;
-  background: rgb(7, 42, 95);
-  background: radial-gradient(
-    circle,
-    rgba(7, 42, 95, 1) 0%,
-    rgba(227, 227, 227, 0) 100%
-  );
-`;
 
+const StyledHeader = styled.h1`
+  width: 80%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #385170;
+  color: white;
+  margin-left: 10%;
+  border-radius: 16px;
+  font-size: 14px;
+  top: 20px;
+`;
 // FUNCTIONALITY
 export default function LogTemperatureForm() {
   const router = useRouter();
@@ -152,8 +149,11 @@ export default function LogTemperatureForm() {
   };
 
   return (
-    <StyledContentWrapper>
-      <AddFormHeader />
+    <>
+      <StyledHeader>
+        <AddFormHeader />
+      </StyledHeader>
+
       <StyledWrapper>
         <StyledFormContainer onSubmit={handleSubmit(onSubmit)}>
           <StyledLabel>
@@ -203,6 +203,6 @@ export default function LogTemperatureForm() {
           )}
         </StyledFormContainer>
       </StyledWrapper>
-    </StyledContentWrapper>
+    </>
   );
 }

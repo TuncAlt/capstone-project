@@ -5,12 +5,7 @@ import { MdAdd, MdEdit, MdSettings } from "react-icons/md";
 import styled from "styled-components";
 
 const StyledDeviceContainer = styled.div`
-  background: rgb(7, 42, 95);
-  background: radial-gradient(
-    circle,
-    rgba(7, 42, 95, 1) 0%,
-    rgba(227, 227, 227, 0) 100%
-  );
+  background: #385170;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,7 +24,7 @@ const StyledHeader = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #072a5e;
+  background-color: #385170;
   color: white;
   margin-left: 10%;
   border-radius: 16px;

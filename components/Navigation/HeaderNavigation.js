@@ -3,38 +3,42 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const StyledLinkContainer = styled.div`
+  width: 100%;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  width: 80%;
-  margin: 0 auto;
+  background-color: #385170;
+  color: white;
+  border-radius: 16px;
 `;
 
 const StyledAddDeviceLink = styled(Link)`
+  position: relative;
   border: solid 1px;
   border-radius: 16px 0 0 16px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  color: white;
-  width: 40%;
-  height: 40px;
-  background-color: ${({ isactive }) => (isactive ? "#072A5E" : "#536580")};
+  color: ${({ isactive }) => (isactive ? "white" : "black")};
+  width: 50%;
+  height: 50px;
+  background-color: ${({ isactive }) => (isactive ? "#9fd3c7" : "#ececec")};
 `;
 
 const StyledLogTempLink = styled(Link)`
+  position: relative;
   border: solid 1px;
   border-radius: 0 16px 16px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  color: white;
-  width: 40%;
-  height: 40px;
-  background-color: ${({ isactive }) => (isactive ? "#072A5E" : "#536580")};
+  color: ${({ isactive }) => (isactive ? "white" : "black")};
+  width: 50%;
+  height: 50px;
+  background-color: ${({ isactive }) => (isactive ? "#9fd3c7" : "#ececec")};
 `;
 
 export default function HeaderNavigation() {
