@@ -109,7 +109,6 @@ export default function TemperatureReadings({
   );
 
   const handleDeleteReading = (deviceId, readingId) => {
-    console.log("handleDelete:", deviceId, readingId);
     deleteReading(deviceId, readingId);
   };
 

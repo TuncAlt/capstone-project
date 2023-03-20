@@ -51,7 +51,6 @@ export default function HeaderNavigation() {
         href="/logTempForm"
         isactive={router.pathname === "/logTempForm"}
       >
-        {" "}
         Log Temp
       </StyledLogTempLink>
     </StyledLinkContainer>
