@@ -13,12 +13,7 @@ const StyledButtonContainer = styled.button`
 `;
 
 const StyledWrapper = styled.div`
-  background: rgb(7, 42, 95);
-  background: radial-gradient(
-    circle,
-    rgba(7, 42, 95, 1) 0%,
-    rgba(227, 227, 227, 0) 100%
-  );
+  background: #385170;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,16 +26,17 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledHeader = styled.h1`
-  font-size: 24px;
   width: 80%;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #072a5e;
+  background-color: #385170;
   color: white;
   margin-left: 10%;
   border-radius: 16px;
+  font-size: 24px;
+  top: 20px;
 `;
 
 const StyledTableBox = styled.div``;

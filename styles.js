@@ -7,7 +7,7 @@ export default createGlobalStyle`
   }
   body{
     box-sizing: border-box;
-    margin: 0;
+    margin: 10px;
     font-family: system-ui;
     background: #142d4c;
     }`;
