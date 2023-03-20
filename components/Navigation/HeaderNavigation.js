@@ -21,7 +21,7 @@ const StyledAddDeviceLink = styled(Link)`
   color: white;
   width: 40%;
   height: 40px;
-  background-color: ${({ isActive }) => (isActive ? "#072A5E" : "#536580")};
+  background-color: ${({ isactive }) => (isactive ? "#072A5E" : "#536580")};
 `;
 
 const StyledLogTempLink = styled(Link)`
@@ -34,7 +34,7 @@ const StyledLogTempLink = styled(Link)`
   color: white;
   width: 40%;
   height: 40px;
-  background-color: ${({ isActive }) => (isActive ? "#072A5E" : "#536580")};
+  background-color: ${({ isactive }) => (isactive ? "#072A5E" : "#536580")};
 `;
 
 export default function HeaderNavigation() {
@@ -43,13 +43,13 @@ export default function HeaderNavigation() {
     <StyledLinkContainer>
       <StyledAddDeviceLink
         href="/addDeviceForm"
-        isActive={router.pathname === "/addDeviceForm"}
+        isactive={router.pathname === "/addDeviceForm"}
       >
         Add Device
       </StyledAddDeviceLink>
       <StyledLogTempLink
         href="/logTempForm"
-        isActive={router.pathname === "/logTempForm"}
+        isactive={router.pathname === "/logTempForm"}
       >
         {" "}
         Log Temp

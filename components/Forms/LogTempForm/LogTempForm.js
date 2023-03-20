@@ -8,17 +8,21 @@ import { uid } from "uid";
 
 // STYLING
 const StyledWrapper = styled.div`
-  position: relative;
   background: rgb(7, 42, 95);
   background: radial-gradient(
     circle,
     rgba(7, 42, 95, 1) 0%,
     rgba(227, 227, 227, 0) 100%
   );
-  height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  width: 80vw;
+  height: 75vh;
+  margin-left: 10%;
+  border-radius: 36px;
+  flex-direction: column;
+  position: relative;
 `;
 
 const StyledFormContainer = styled.form`
@@ -83,6 +87,16 @@ const StyledSelectField = styled.select`
   border-radius: 16px;
   position: relative;
 `;
+const StyledContentWrapper = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background: rgb(7, 42, 95);
+  background: radial-gradient(
+    circle,
+    rgba(7, 42, 95, 1) 0%,
+    rgba(227, 227, 227, 0) 100%
+  );
+`;
 
 // FUNCTIONALITY
 export default function LogTemperatureForm() {
@@ -138,7 +152,7 @@ export default function LogTemperatureForm() {
   };
 
   return (
-    <>
+    <StyledContentWrapper>
       <AddFormHeader />
       <StyledWrapper>
         <StyledFormContainer onSubmit={handleSubmit(onSubmit)}>
@@ -189,6 +203,6 @@ export default function LogTemperatureForm() {
           )}
         </StyledFormContainer>
       </StyledWrapper>
-    </>
+    </StyledContentWrapper>
   );
 }

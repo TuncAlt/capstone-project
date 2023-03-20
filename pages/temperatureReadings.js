@@ -9,6 +9,7 @@ const StyledButtonContainer = styled.button`
   border: none;
   cursor: pointer;
   color: white;
+  text-decoration: none;
 `;
 
 const StyledWrapper = styled.div`
@@ -19,7 +20,7 @@ const StyledWrapper = styled.div`
     rgba(227, 227, 227, 0) 100%
   );
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   width: 80vw;
   height: 75vh;
@@ -69,6 +70,20 @@ const StyledSearchInput = styled.input`
   border: none;
   margin-right: 10px;
 `;
+const StyledContentWrapper = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background: rgb(7, 42, 95);
+  background: radial-gradient(
+    circle,
+    rgba(7, 42, 95, 1) 0%,
+    rgba(227, 227, 227, 0) 100%
+  );
+`;
+const StyledInputField = styled.input`
+  width: 20px;
+  margin: 0;
+`;
 
 export default function TemperatureReadings({
   devices,
@@ -89,7 +104,7 @@ export default function TemperatureReadings({
   }
 
   // filter the readings based on deviceId
-  const readings = device.readings.filter((reading) =>
+  const readings = device?.readings?.filter((reading) =>
     reading.date.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -116,7 +131,7 @@ export default function TemperatureReadings({
 
   // render the list of readings with edit and delete functionality
   return (
-    <>
+    <StyledContentWrapper>
       <StyledHeader>Temperature Readings</StyledHeader>
       <StyledWrapper>
         <StyledSearchBox>
@@ -141,7 +156,7 @@ export default function TemperatureReadings({
                   <td>{reading?.date} </td>
                   <td>
                     {editingReadingId === reading.id ? (
-                      <input
+                      <StyledInputField
                         type="number"
                         value={editedTemperature}
                         onChange={(event) =>
@@ -155,9 +170,11 @@ export default function TemperatureReadings({
 
                   <StyledButtonContainer>
                     {editingReadingId === reading.id ? (
-                      <button onClick={() => handleSave(device.id, reading.id)}>
+                      <StyledButtonContainer
+                        onClick={() => handleSave(device.id, reading.id)}
+                      >
                         <MdSave />
-                      </button>
+                      </StyledButtonContainer>
                     ) : (
                       <MdEdit
                         onClick={() =>
@@ -168,9 +185,9 @@ export default function TemperatureReadings({
                   </StyledButtonContainer>
                   <StyledButtonContainer>
                     {editingReadingId === reading.id ? (
-                      <button>
+                      <StyledButtonContainer>
                         <MdCancel onClick={handleCancel} />
-                      </button>
+                      </StyledButtonContainer>
                     ) : (
                       <MdDelete
                         onClick={() =>
@@ -185,6 +202,6 @@ export default function TemperatureReadings({
           </StyledTable>
         </StyledTableBox>
       </StyledWrapper>
-    </>
+    </StyledContentWrapper>
   );
 }

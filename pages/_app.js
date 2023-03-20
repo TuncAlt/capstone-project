@@ -8,11 +8,12 @@ export default function App({ Component, pageProps }) {
   const [devices, addDevice, deleteReading, editReading] =
     useLocalStorageDevices();
   return (
-    <>
+    <main>
       <GlobalStyle />
       <Head>
         <title>Capstone Project</title>
       </Head>
+
       <Component
         {...pageProps}
         devices={devices}
@@ -21,6 +22,6 @@ export default function App({ Component, pageProps }) {
         editReading={editReading}
       />
       <FooterNavBar />
-    </>
+    </main>
   );
 }

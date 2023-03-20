@@ -2,8 +2,8 @@ import DeviceList from "@/components/DeviceList/deviceList";
 
 export default function Home({ devices }) {
   return (
-    <main>
+    <div>
       <DeviceList devices={devices} />;
-    </main>
+    </div>
   );
 }

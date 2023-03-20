@@ -5,15 +5,15 @@ import Link from "next/link";
 import styled from "styled-components";
 
 //Styling
-const StyledPageWrapper = styled.main`
+const StyledPageWrapper = styled.div`
+  height: 100vh;
+  width: 100vw;
   background: rgb(7, 42, 95);
   background: radial-gradient(
     circle,
     rgba(7, 42, 95, 1) 0%,
     rgba(227, 227, 227, 0) 100%
   );
-  height: 100vh;
-  width: 100vw;
 `;
 const StyledWrapper = styled.div`
   background: rgb(7, 42, 95);
