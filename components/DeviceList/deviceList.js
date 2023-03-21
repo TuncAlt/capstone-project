@@ -125,14 +125,17 @@ export default function DeviceList({ devices }) {
               device?.readings[device?.readings?.length - 1]?.temperature >
                 0 ? (
                 <>
-                  {Number(device?.readings?.temperature) >
-                  Number(device.maxTemp) ? (
+                  {Number(
+                    device?.readings[device?.readings?.length - 1]?.temperature
+                  ) > Number(device.maxTemp) ? (
                     <StyledIconWrapper>
                       {" "}
                       <FaExclamationTriangle />
                     </StyledIconWrapper>
-                  ) : Number(device?.readings?.temperature) <
-                    Number(device.minTemp) ? (
+                  ) : Number(
+                      device?.readings[device?.readings?.length - 1]
+                        ?.temperature
+                    ) < Number(device.minTemp) ? (
                     <StyledIconWrapper>
                       {" "}
                       <FaExclamationTriangle />

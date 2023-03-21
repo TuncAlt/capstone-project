@@ -1,4 +1,7 @@
+import DeviceEdit from "@/components/EditComponents/DeviceEdit";
+import DevivceEditButton from "@/components/EditComponents/DeviceEditButton";
 import TemperatureEdit from "@/components/EditComponents/TemperatureEdit";
+import AddDeviceForm from "@/components/Forms/AddDeviceForm/AddDeviceForm";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { MdAdd, MdEdit, MdSettings } from "react-icons/md";
@@ -24,7 +27,7 @@ const StyledHeader = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #385170;
+  background-color: #072a5e;
   color: white;
   margin-left: 10%;
   border-radius: 16px;
@@ -59,16 +62,23 @@ const StyledTable = styled.table`
     color: white;
   }
 `;
-const StyledComponentBox = styled.div`
+const StyledSettingsBox = styled.div`
   position: absolute;
   margin-left: 95px;
-  margin-top: 65px;
+  margin-top: 66px;
+  z-index: 1;
+`;
+const StyledEditBox = styled.div`
+  position: absolute;
+  margin-left: 245px;
+  margin-top: 64px;
   z-index: 1;
 `;
 
 export default function Device({ devices }) {
   const router = useRouter();
   const { id } = router.query;
+  console.log(devices);
 
   const device = devices?.find((device) => device.id === id);
   const readings = device?.readings || [];
@@ -86,15 +96,18 @@ export default function Device({ devices }) {
   return (
     <>
       <StyledHeader>{device.name}</StyledHeader>
-      <StyledComponentBox>
+      <StyledEditBox>
         <TemperatureEdit device={device} />
-      </StyledComponentBox>
+      </StyledEditBox>
+      <StyledSettingsBox>
+        <DevivceEditButton device={device} />
+      </StyledSettingsBox>
 
       <StyledDeviceContainer>
         {device?.readings?.length > 0 ? (
           <>
             <StyledDeviceTemperatureBox onClick={handleAddClick}>
-              {device.readings[device.readings.length - 1].temperature}°
+              {device.readings[0].temperature}°
             </StyledDeviceTemperatureBox>
             <StyledTableBox>
               <StyledTable>
