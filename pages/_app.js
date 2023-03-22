@@ -1,12 +1,17 @@
-import LineChart from "@/components/Chart/chart";
 import FooterNavBar from "@/components/Navigation/FooterNavBar/FooterNavBar";
 import useLocalStorageDevices from "@/components/UseLocalStorage/UseLocalStorageDevices";
 import GlobalStyle from "@/styles";
 import Head from "next/head";
 
 export default function App({ Component, pageProps }) {
-  const [devices, addDevice, deleteReading, editReading] =
-    useLocalStorageDevices();
+  const [
+    devices,
+    addDevice,
+    deleteReading,
+    editReading,
+    deleteDevice,
+    updateDevice,
+  ] = useLocalStorageDevices();
   return (
     <main>
       <GlobalStyle />
@@ -20,6 +25,8 @@ export default function App({ Component, pageProps }) {
         addDevice={addDevice}
         deleteReading={deleteReading}
         editReading={editReading}
+        deleteDevice={deleteDevice}
+        updateDevice={updateDevice}
       />
       <FooterNavBar />
     </main>

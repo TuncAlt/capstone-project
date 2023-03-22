@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import { useState } from "react";
-import HeaderNavigation from "@/components/Navigation/HeaderNavigation";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { MdCheck } from "react-icons/md";
 
 //STYLING
 const StyledFormContainer = styled.form`
@@ -37,15 +38,36 @@ const StyledError = styled.p`
   padding: 5px;
   border-radius: 16px;
 `;
-const StyledSubmit = styled.p`
-  display: flex;
+const StyledSubmit = styled.div`
   align-items: center;
+  display: flex;
   color: white;
   background-color: green;
   padding: 5px;
   border-radius: 5px;
-  width: 220px;
+  justify-content: center;
+  position: relative;
+  animation: jump 1s ease-in-out 3;
+
+  @keyframes jump {
+    0% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(-20px);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    75% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
 `;
+
 const StyledSubmitButton = styled.button`
   margin: 10px;
   padding: 10px;
@@ -73,11 +95,6 @@ const StyledWrapper = styled.div`
   border-radius: 36px;
   flex-direction: column;
   position: relative;
-`;
-
-const StyledToggleSpan = styled.span`
-  color: white;
-  margin-right: 40px;
 `;
 
 // The ToggleSwitch(Checkbox) is copied by this example "https://codesandbox.io/s/6v7n1vr8yn?file=/src/index.js"
@@ -126,31 +143,46 @@ const CheckBox = styled.input`
     }
   }
 `;
-const StyledHeader = styled.h1`
-  width: 80%;
-  height: 50px;
+const StyledSubmitMessage = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #385170;
-  color: white;
-  margin-left: 10%;
-  border-radius: 16px;
-  font-size: 14px;
-  top: 20px;
+  font-size: 36px;
+  color: green;
 `;
 //FUNCTIONALITY
 
-export default function AddDeviceForm({ addDevice }) {
+export default function AddDeviceForm({ addDevice, devices, updateDevice }) {
+  const router = useRouter();
+  const { deviceId } = router.query;
+  // find the device with matching deviceId
+  const device = devices?.find((device) => device.id === deviceId);
   const [submitMessage, setSubmitMessage] = useState(false);
-  const [isAutomatic, setIsAutomatic] = useState(false);
-
+  const [isAutomatic, setIsAutomatic] = useState(device?.generateData || false);
+  // if device not found, render null
+  console.log(device);
   //register stores value from each input field in data, has a handleSubmit Function and error handling
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
+  useEffect(() => {
+    if (device) {
+      setValue("name", device.name);
+      setValue("location", device.location);
+      setValue("type", device.type);
+      setValue("minTemp", device.minTemp);
+      setValue("maxTemp", device.maxTemp);
+      setValue("generateData", device.generateData);
+    }
+  }, [device, setValue]);
   // toggle Function for Checkbox
   const handleToggle = () => {
     setIsAutomatic(!isAutomatic);
@@ -159,16 +191,22 @@ export default function AddDeviceForm({ addDevice }) {
   //submitMessage is getting displayed for 3 sec. after that the form is getting resetet
   const onSubmit = (data, event) => {
     event.target.reset();
-    addDevice(data);
+    if (device) {
+      updateDevice(device.id, data);
+      setSubmitMessage(true);
+    } else {
+      addDevice(data);
+      setSubmitMessage(true);
+    }
     setSubmitMessage(true);
-    setTimeout(() => setSubmitMessage(false), 3000);
+    setTimeout(() => {
+      setSubmitMessage(false);
+      router.back();
+    }, 500);
   };
 
   return (
     <>
-      <StyledHeader>
-        <HeaderNavigation />
-      </StyledHeader>
       <StyledWrapper>
         <StyledFormContainer onSubmit={handleSubmit(onSubmit)}>
           <CheckBoxWrapper>
@@ -178,7 +216,6 @@ export default function AddDeviceForm({ addDevice }) {
               value="true"
               {...register("generateData")}
               onChange={handleToggle}
-              checked={isAutomatic}
             />
             <CheckBoxLabel htmlFor="checkbox" />
           </CheckBoxWrapper>
@@ -245,7 +282,11 @@ export default function AddDeviceForm({ addDevice }) {
           </StyledLabel>
           <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
           {submitMessage && (
-            <StyledSubmit>Device Succesfully Added!</StyledSubmit>
+            <StyledSubmitMessage>
+              <StyledSubmit>
+                <MdCheck />
+              </StyledSubmit>
+            </StyledSubmitMessage>
           )}
         </StyledFormContainer>
       </StyledWrapper>
