@@ -1,10 +1,7 @@
-import DeviceEdit from "@/components/EditComponents/DeviceEdit";
 import DevivceEditButton from "@/components/EditComponents/DeviceEditButton";
 import TemperatureEdit from "@/components/EditComponents/TemperatureEdit";
-import AddDeviceForm from "@/components/Forms/AddDeviceForm/AddDeviceForm";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { MdAdd, MdEdit, MdSettings } from "react-icons/md";
+import { MdAdd } from "react-icons/md";
 import styled from "styled-components";
 
 const StyledDeviceContainer = styled.div`
@@ -81,6 +78,7 @@ export default function Device({ devices }) {
   console.log(devices);
 
   const device = devices?.find((device) => device.id === id);
+
   const readings = device?.readings || [];
 
   const lastFiveReadings = readings.slice(-5).reverse();
@@ -107,7 +105,7 @@ export default function Device({ devices }) {
         {device?.readings?.length > 0 ? (
           <>
             <StyledDeviceTemperatureBox onClick={handleAddClick}>
-              {device.readings[0].temperature}°
+              {device.readings[device.readings.length - 1].temperature}°
             </StyledDeviceTemperatureBox>
             <StyledTableBox>
               <StyledTable>
