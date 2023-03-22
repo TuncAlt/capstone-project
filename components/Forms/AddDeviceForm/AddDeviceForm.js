@@ -212,7 +212,6 @@ export default function AddDeviceForm({ addDevice, devices, updateDevice }) {
               value="true"
               {...register("generateData")}
               onChange={handleToggle}
-              checked={isAutomatic}
             />
             <CheckBoxLabel htmlFor="checkbox" />
           </CheckBoxWrapper>

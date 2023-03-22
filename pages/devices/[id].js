@@ -1,3 +1,4 @@
+import DeviceDeleteButton from "@/components/EditComponents/DeviceDeleteButton";
 import DevivceEditButton from "@/components/EditComponents/DeviceEditButton";
 import TemperatureEdit from "@/components/EditComponents/TemperatureEdit";
 import { useRouter } from "next/router";
@@ -71,8 +72,14 @@ const StyledEditBox = styled.div`
   margin-top: 64px;
   z-index: 1;
 `;
+const StyledDeleteBox = styled.div`
+  position: absolute;
+  margin-left: 165px;
+  margin-top: 135px;
+  z-index: 1;
+`;
 
-export default function Device({ devices }) {
+export default function Device({ devices, deleteDevice }) {
   const router = useRouter();
   const { id } = router.query;
   console.log(devices);
@@ -81,6 +88,7 @@ export default function Device({ devices }) {
 
   const readings = device?.readings || [];
 
+  console.log(readings);
   const lastFiveReadings = readings.slice(-5).reverse();
 
   const handleAddClick = () => {
@@ -100,6 +108,9 @@ export default function Device({ devices }) {
       <StyledSettingsBox>
         <DevivceEditButton device={device} />
       </StyledSettingsBox>
+      <StyledDeleteBox>
+        <DeviceDeleteButton deleteDevice={deleteDevice} device={device} />
+      </StyledDeleteBox>
 
       <StyledDeviceContainer>
         {device?.readings?.length > 0 ? (
@@ -117,9 +128,9 @@ export default function Device({ devices }) {
                 </thead>
                 <tbody>
                   {lastFiveReadings.map((reading) => (
-                    <tr key={`${device.id}-${reading.id}`}>
-                      <td>{reading.date}</td>
-                      <td>{reading.temperature} °C</td>
+                    <tr key={`${device.id}-${reading?.id}`}>
+                      <td>{reading?.date}</td>
+                      <td>{reading?.temperature} °C</td>
                     </tr>
                   ))}
                 </tbody>

@@ -27,7 +27,7 @@ export default function useLocalStorageDevices() {
   const editReading = (deviceId, readingId, updatedTemperature) => {
     const updatedDevices = devices.map((device) => {
       if (device.id === deviceId) {
-        const updatedReadings = device?.readings?.map((reading, index) => {
+        const updatedReadings = device?.readings?.map((reading) => {
           if (reading.id === readingId) {
             return { ...reading, temperature: updatedTemperature };
           }
@@ -40,8 +40,9 @@ export default function useLocalStorageDevices() {
     setDevices(updatedDevices);
   };
 
-  const deleteDevice = (deviceId) => {
-    setDevices(devices.filter((device) => device.id !== deviceId));
+  const deleteDevice = (id) => {
+    console.log("Device ID:" + id);
+    setDevices(devices.filter((device) => device.id !== id));
   };
 
   const updateDevice = (id, updatedDevice) => {
