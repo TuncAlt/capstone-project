@@ -198,7 +198,11 @@ export default function AddDeviceForm({ addDevice, devices, updateDevice }) {
       addDevice(data);
       setSubmitMessage(true);
     }
-    setTimeout(() => setSubmitMessage(false), 3000);
+    setSubmitMessage(true);
+    setTimeout(() => {
+      setSubmitMessage(false);
+      router.back();
+    }, 500);
   };
 
   return (

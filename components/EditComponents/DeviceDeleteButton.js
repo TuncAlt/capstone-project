@@ -11,6 +11,11 @@ const StyledButtonContainer = styled.button`
   cursor: pointer;
 `;
 
+const StyledCheckMark = styled.div`
+  z-index: 1;
+  color: white;
+`;
+
 export default function DeviceDeleteButton({ deleteDevice, device }) {
   const [deleteMessage, setDeleteMessage] = useState(false);
   const router = useRouter();
@@ -23,7 +28,7 @@ export default function DeviceDeleteButton({ deleteDevice, device }) {
       console.log("device is deleted");
       setDeleteMessage(false);
       router.push("/");
-    }, 500);
+    }, 1000); // wait for 1 second before navigating back to home
   };
 
   return (

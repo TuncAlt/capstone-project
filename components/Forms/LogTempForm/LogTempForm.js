@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import AddFormHeader from "@/components/Navigation/HeaderNavigation";
 import { useRouter } from "next/router";
 import { uid } from "uid";
+import { MdCheck } from "react-icons/md";
 
 // STYLING
 const StyledWrapper = styled.div`
@@ -56,14 +57,34 @@ const StyledError = styled.p`
   border-radius: 16px;
 `;
 
-const StyledSubmit = styled.p`
-  display: flex;
+const StyledSubmit = styled.div`
   align-items: center;
+  display: flex;
   color: white;
   background-color: green;
   padding: 5px;
   border-radius: 5px;
-  width: 100%;
+  justify-content: center;
+  position: relative;
+  animation: jump 1s ease-in-out 3;
+
+  @keyframes jump {
+    0% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(-20px);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    75% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
 `;
 
 const StyledSubmitButton = styled.button`
@@ -94,6 +115,18 @@ const StyledHeader = styled.h1`
   border-radius: 16px;
   font-size: 14px;
   top: 20px;
+`;
+const StyledSubmitMessage = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  color: green;
 `;
 // FUNCTIONALITY
 export default function LogTemperatureForm() {
@@ -145,7 +178,10 @@ export default function LogTemperatureForm() {
       ...devices.slice(deviceIndex + 1),
     ]);
     setSubmitMessage(true);
-    setTimeout(() => setSubmitMessage(false), 3000);
+    setTimeout(() => {
+      setSubmitMessage(false);
+      router.back();
+    }, 500);
   };
 
   return (
@@ -199,7 +235,11 @@ export default function LogTemperatureForm() {
           <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
 
           {submitMessage && (
-            <StyledSubmit>Temperature reading successfully added!</StyledSubmit>
+            <StyledSubmitMessage>
+              <StyledSubmit>
+                <MdCheck />
+              </StyledSubmit>
+            </StyledSubmitMessage>
           )}
         </StyledFormContainer>
       </StyledWrapper>
