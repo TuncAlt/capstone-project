@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { MdCheck } from "react-icons/md";
+import { StyledHeader, StyledWrapper } from "@/styles";
+import HeaderNavigation from "@/components/Navigation/HeaderNavigation";
 
 //STYLING
 const StyledFormContainer = styled.form`
@@ -81,19 +83,6 @@ const StyledSelectField = styled.select`
   padding: 10px;
   width: 240px;
   border-radius: 16px;
-  position: relative;
-`;
-
-const StyledWrapper = styled.div`
-  background: #385170;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80vw;
-  height: 75vh;
-  margin-left: 10%;
-  border-radius: 36px;
-  flex-direction: column;
   position: relative;
 `;
 
@@ -207,6 +196,9 @@ export default function AddDeviceForm({ addDevice, devices, updateDevice }) {
 
   return (
     <>
+      <StyledHeader>
+        <HeaderNavigation />
+      </StyledHeader>
       <StyledWrapper>
         <StyledFormContainer onSubmit={handleSubmit(onSubmit)}>
           <CheckBoxWrapper>

@@ -1,83 +1,10 @@
 import DeviceDeleteButton from "@/components/EditComponents/DeviceDeleteButton";
 import DevivceEditButton from "@/components/EditComponents/DeviceEditButton";
 import TemperatureEdit from "@/components/EditComponents/TemperatureEdit";
+import { StyledHeader, StyledWrapper } from "@/styles";
 import { useRouter } from "next/router";
 import { MdAdd } from "react-icons/md";
 import styled from "styled-components";
-
-const StyledDeviceContainer = styled.div`
-  background: #385170;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80vw;
-  height: 75vh;
-  margin-left: 10%;
-  border-radius: 36px;
-  flex-direction: column;
-  position: relative;
-  flex: wrap;
-  overflow: auto;
-`;
-const StyledHeader = styled.h1`
-  width: 80%;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #072a5e;
-  color: white;
-  margin-left: 10%;
-  border-radius: 16px;
-`;
-const StyledDeviceTemperatureBox = styled.button`
-  position: absolute;
-  top: 26px;
-  width: 92px;
-  height: 92px;
-  border-radius: 50%;
-  background-color: #f0f0f0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 36px;
-  font-weight: 900;
-  margin-bottom: 20px;
-`;
-
-const StyledTableBox = styled.div``;
-const StyledTable = styled.table`
-  width: 100%;
-  height: 60%;
-  th {
-    border-bottom: solid 1px white;
-    color: white;
-    text-align: start;
-  }
-  td {
-    text-align: end;
-    padding: 2px;
-    color: white;
-  }
-`;
-const StyledSettingsBox = styled.div`
-  position: absolute;
-  margin-left: 95px;
-  margin-top: 66px;
-  z-index: 1;
-`;
-const StyledEditBox = styled.div`
-  position: absolute;
-  margin-left: 245px;
-  margin-top: 64px;
-  z-index: 1;
-`;
-const StyledDeleteBox = styled.div`
-  position: absolute;
-  margin-left: 165px;
-  margin-top: 135px;
-  z-index: 1;
-`;
 
 export default function Device({ devices, deleteDevice }) {
   const router = useRouter();
@@ -112,7 +39,7 @@ export default function Device({ devices, deleteDevice }) {
         <DeviceDeleteButton deleteDevice={deleteDevice} device={device} />
       </StyledDeleteBox>
 
-      <StyledDeviceContainer>
+      <StyledWrapper>
         {device?.readings?.length > 0 ? (
           <>
             <StyledDeviceTemperatureBox onClick={handleAddClick}>
@@ -143,7 +70,56 @@ export default function Device({ devices, deleteDevice }) {
           </StyledDeviceTemperatureBox>
         )}
         {!device?.readings?.length && <div>No readings yet.</div>}
-      </StyledDeviceContainer>
+      </StyledWrapper>
     </>
   );
 }
+
+const StyledDeviceTemperatureBox = styled.button`
+  position: absolute;
+  top: 26px;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 20px;
+`;
+
+const StyledTableBox = styled.div``;
+const StyledTable = styled.table`
+  width: 100%;
+  height: 60%;
+  th {
+    border-bottom: solid 1px white;
+    color: white;
+    text-align: start;
+  }
+  td {
+    text-align: end;
+    padding: 2px;
+    color: white;
+  }
+`;
+const StyledSettingsBox = styled.div`
+  position: absolute;
+  margin-left: 24vw;
+  margin-top: 8.5vh;
+  z-index: 1;
+`;
+const StyledEditBox = styled.div`
+  position: absolute;
+  margin-left: 62.5vw;
+  margin-top: 8vh;
+  z-index: 1;
+`;
+const StyledDeleteBox = styled.div`
+  position: absolute;
+  margin-left: 42vw;
+  margin-top: 19.5vh;
+  z-index: 1;
+`;

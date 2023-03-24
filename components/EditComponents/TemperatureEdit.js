@@ -6,7 +6,7 @@ const StyledEditButton = styled.button`
   background-color: transparent;
   border: none;
   font-size: 24px;
-  color: white;
+  color: #faf5e4;
   cursor: pointer;
 `;
 
