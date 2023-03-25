@@ -6,20 +6,129 @@ import AddFormHeader from "@/components/Navigation/HeaderNavigation";
 import { useRouter } from "next/router";
 import { uid } from "uid";
 import { MdCheck } from "react-icons/md";
+import { StyledWrapper, StyledHeader } from "@/styles";
+import HeaderNavigation from "@/components/Navigation/HeaderNavigation";
+
+// FUNCTIONALITY
+export default function LogTemperatureForm() {
+  const router = useRouter();
+  const { deviceId } = router.query;
+  const [submitMessage, setSubmitMessage] = useState(false);
+  const [devices, setDevices] = useLocalStorageState("devices", {
+    defaultValue: [],
+  });
+  useEffect(() => {}, [deviceId]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      date: new Date().toISOString().substr(0, 10),
+    },
+  });
+
+  // On submit, add the temperature reading to the device's readings array
+  const onSubmit = (data, event) => {
+    event.target.reset();
+    // find the index of the selected device
+    const deviceIndex = devices.findIndex(
+      (device) => device.id === data.device
+    );
+
+    // selecting device and updating readings array with date and temp
+    if (!Array.isArray(devices[deviceIndex].readings)) {
+      devices[deviceIndex].readings = [];
+    }
+
+    const updatedDevice = {
+      ...devices[deviceIndex],
+
+      readings: [
+        ...devices[deviceIndex].readings,
+        { date: data.date, temperature: data.temperature, id: uid() },
+      ],
+    };
+
+    //slice is used to create a new array that includes all devices
+    //up to index of the device that is getting updated
+    //after that it getting passed to setDevices and updates the state devices
+    setDevices([
+      ...devices.slice(0, deviceIndex),
+      updatedDevice,
+      ...devices.slice(deviceIndex + 1),
+    ]);
+    setSubmitMessage(true);
+    setTimeout(() => {
+      setSubmitMessage(false);
+      router.back();
+    }, 500);
+  };
+
+  return (
+    <>
+      <StyledHeader>
+        <HeaderNavigation />
+      </StyledHeader>
+
+      <StyledWrapper>
+        <StyledFormContainer onSubmit={handleSubmit(onSubmit)}>
+          <StyledLabel>
+            <StyledSelectField
+              {...register("device", { required: true })}
+              defaultValue={deviceId}
+            >
+              <option value="" disabled selected>
+                Select a device
+              </option>
+              {devices?.map((device) => (
+                <option key={device.id} value={device.id}>
+                  {device.name}
+                </option>
+              ))}
+            </StyledSelectField>
+            {errors.device && <StyledError>Please select a device</StyledError>}
+          </StyledLabel>
+
+          <StyledLabel>
+            <StyledInput
+              type="date"
+              {...register("date", { required: true })}
+            />
+            {errors.date && <StyledError>Please select a date</StyledError>}
+          </StyledLabel>
+
+          <StyledLabel>
+            <StyledInput
+              type="number"
+              placeholder="Temperature"
+              {...register("temperature", {
+                required: true,
+                min: -25,
+                max: 25,
+              })}
+            />
+            {errors.temperature && (
+              <StyledError>Please enter a temperature</StyledError>
+            )}
+          </StyledLabel>
+
+          <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
+
+          {submitMessage && (
+            <StyledSubmitMessage>
+              <StyledSubmit>
+                <MdCheck />
+              </StyledSubmit>
+            </StyledSubmitMessage>
+          )}
+        </StyledFormContainer>
+      </StyledWrapper>
+    </>
+  );
+}
 
 // STYLING
-const StyledWrapper = styled.div`
-  background: #385170;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80vw;
-  height: 75vh;
-  margin-left: 10%;
-  border-radius: 36px;
-  flex-direction: column;
-  position: relative;
-`;
 
 const StyledFormContainer = styled.form`
   display: flex;
@@ -103,19 +212,6 @@ const StyledSelectField = styled.select`
   position: relative;
 `;
 
-const StyledHeader = styled.h1`
-  width: 80%;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #385170;
-  color: white;
-  margin-left: 10%;
-  border-radius: 16px;
-  font-size: 14px;
-  top: 20px;
-`;
 const StyledSubmitMessage = styled.div`
   position: absolute;
   top: 0;
@@ -128,121 +224,3 @@ const StyledSubmitMessage = styled.div`
   font-size: 36px;
   color: green;
 `;
-// FUNCTIONALITY
-export default function LogTemperatureForm() {
-  const router = useRouter();
-  const { deviceId } = router.query;
-  const [submitMessage, setSubmitMessage] = useState(false);
-  const [devices, setDevices] = useLocalStorageState("devices", {
-    defaultValue: [],
-  });
-  useEffect(() => {}, [deviceId]);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      date: new Date().toISOString().substr(0, 10),
-    },
-  });
-
-  // On submit, add the temperature reading to the device's readings array
-  const onSubmit = (data, event) => {
-    event.target.reset();
-    // find the index of the selected device
-    const deviceIndex = devices.findIndex(
-      (device) => device.id === data.device
-    );
-
-    // selecting device and updating readings array with date and temp
-    if (!Array.isArray(devices[deviceIndex].readings)) {
-      devices[deviceIndex].readings = [];
-    }
-
-    const updatedDevice = {
-      ...devices[deviceIndex],
-
-      readings: [
-        ...devices[deviceIndex].readings,
-        { date: data.date, temperature: data.temperature, id: uid() },
-      ],
-    };
-
-    //slice is used to create a new array that includes all devices
-    //up to index of the device that is getting updated
-    //after that it getting passed to setDevices and updates the state devices
-    setDevices([
-      ...devices.slice(0, deviceIndex),
-      updatedDevice,
-      ...devices.slice(deviceIndex + 1),
-    ]);
-    setSubmitMessage(true);
-    setTimeout(() => {
-      setSubmitMessage(false);
-      router.back();
-    }, 500);
-  };
-
-  return (
-    <>
-      <StyledHeader>
-        <AddFormHeader />
-      </StyledHeader>
-
-      <StyledWrapper>
-        <StyledFormContainer onSubmit={handleSubmit(onSubmit)}>
-          <StyledLabel>
-            <StyledSelectField
-              {...register("device", { required: true })}
-              defaultValue={deviceId}
-            >
-              <option value="" disabled selected>
-                Select a device
-              </option>
-              {devices?.map((device) => (
-                <option key={device.id} value={device.id}>
-                  {device.name}
-                </option>
-              ))}
-            </StyledSelectField>
-            {errors.device && <StyledError>Please select a device</StyledError>}
-          </StyledLabel>
-
-          <StyledLabel>
-            <StyledInput
-              type="date"
-              {...register("date", { required: true })}
-            />
-            {errors.date && <StyledError>Please select a date</StyledError>}
-          </StyledLabel>
-
-          <StyledLabel>
-            <StyledInput
-              type="number"
-              placeholder="Temperature"
-              {...register("temperature", {
-                required: true,
-                min: -25,
-                max: 25,
-              })}
-            />
-            {errors.temperature && (
-              <StyledError>Please enter a temperature</StyledError>
-            )}
-          </StyledLabel>
-
-          <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
-
-          {submitMessage && (
-            <StyledSubmitMessage>
-              <StyledSubmit>
-                <MdCheck />
-              </StyledSubmit>
-            </StyledSubmitMessage>
-          )}
-        </StyledFormContainer>
-      </StyledWrapper>
-    </>
-  );
-}

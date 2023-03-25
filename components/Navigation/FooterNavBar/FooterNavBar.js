@@ -11,7 +11,7 @@ const StyledLink = styled(Link)`
   align-items: center;
   width: 33.33%;
   height: 50px;
-  color: white;
+  color: #faf5e4;
 `;
 
 const FooterContainer = styled.footer`

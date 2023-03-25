@@ -1,5 +1,4 @@
 import AddDeviceForm from "@/components/Forms/AddDeviceForm/AddDeviceForm";
-import HeaderNavigation from "@/components/Navigation/HeaderNavigation";
 
 export default function addDeviceForm({
   addDevice,
@@ -9,8 +8,7 @@ export default function addDeviceForm({
   updateDevice,
 }) {
   return (
-    <div>
-      <HeaderNavigation />
+    <>
       <AddDeviceForm
         addDevice={addDevice}
         device={device}
@@ -18,6 +16,6 @@ export default function addDeviceForm({
         devices={devices}
         updateDevice={updateDevice}
       />
-    </div>
+    </>
   );
 }
