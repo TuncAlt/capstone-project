@@ -1,3 +1,4 @@
+import DeviceChart from "@/components/Chart/chart";
 import DeviceDeleteButton from "@/components/EditComponents/DeviceDeleteButton";
 import DevivceEditButton from "@/components/EditComponents/DeviceEditButton";
 import TemperatureEdit from "@/components/EditComponents/TemperatureEdit";
@@ -82,15 +83,11 @@ const StyledDeleteBox = styled.div`
 export default function Device({ devices, deleteDevice }) {
   const router = useRouter();
   const { id } = router.query;
-  console.log(devices);
 
   const device = devices?.find((device) => device.id === id);
 
   const readings = device?.readings || [];
-
-  console.log(readings);
   const lastFiveReadings = readings.slice(-5).reverse();
-
   const handleAddClick = () => {
     router.push(`/logTempForm?deviceId=${device.id}`);
   };
@@ -115,6 +112,13 @@ export default function Device({ devices, deleteDevice }) {
       <StyledDeviceContainer>
         {device?.readings?.length > 0 ? (
           <>
+            <DeviceChart
+              key={device.id}
+              device={device}
+              readings={readings}
+              lastFiveReadings={lastFiveReadings}
+            />
+
             <StyledDeviceTemperatureBox onClick={handleAddClick}>
               {device.readings[device.readings.length - 1].temperature}°
             </StyledDeviceTemperatureBox>
