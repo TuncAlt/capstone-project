@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { MdEdit, MdDelete, MdCancel, MdSave } from "react-icons/md";
 import styled from "styled-components";
+import { StyledWrapper, StyledHeader } from "@/styles";
 
 const StyledButtonContainer = styled.button`
   background-color: Transparent;
@@ -10,33 +11,6 @@ const StyledButtonContainer = styled.button`
   cursor: pointer;
   color: white;
   text-decoration: none;
-`;
-
-const StyledWrapper = styled.div`
-  background: #385170;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80vw;
-  height: 75vh;
-  margin-left: 10%;
-  border-radius: 36px;
-  flex-direction: column;
-  position: relative;
-`;
-
-const StyledHeader = styled.h1`
-  width: 80%;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #385170;
-  color: white;
-  margin-left: 10%;
-  border-radius: 16px;
-  font-size: 24px;
-  top: 20px;
 `;
 
 const StyledTableBox = styled.div``;
@@ -69,12 +43,6 @@ const StyledSearchInput = styled.input`
 const StyledContentWrapper = styled.div`
   height: 100vh;
   width: 100vw;
-  background: rgb(7, 42, 95);
-  background: radial-gradient(
-    circle,
-    rgba(7, 42, 95, 1) 0%,
-    rgba(227, 227, 227, 0) 100%
-  );
 `;
 const StyledInputField = styled.input`
   width: 20px;
@@ -127,7 +95,7 @@ export default function TemperatureReadings({
   // render the list of readings with edit and delete functionality
   return (
     <StyledContentWrapper>
-      <StyledHeader>Temperature Readings</StyledHeader>
+      <StyledHeader font-size={24}>Temperature Readings</StyledHeader>
       <StyledWrapper>
         <StyledSearchBox>
           <StyledSearchInput

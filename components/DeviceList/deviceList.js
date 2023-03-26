@@ -1,23 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaExclamationTriangle } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import Link from "next/link";
 import styled from "styled-components";
+import { StyledWrapper } from "@/styles";
 
 //Styling
-const StyledWrapper = styled.div`
-  background: #385170;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80vw;
-  height: 75vh;
-  margin-left: 10%;
-  border-radius: 36px;
-  flex-wrap: wrap;
-  position: absolute;
-  overflow: auto;
-`;
 
 const StyledLinkContainer = styled.div`
   display: flex;
@@ -93,7 +81,7 @@ const StyledHeader = styled.h1`
   text-align: center;
   width: 100%;
   top: 20px;
-  color: white;
+  color: #faf5e4;
 `;
 
 //Function

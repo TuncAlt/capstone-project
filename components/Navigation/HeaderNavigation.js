@@ -14,6 +14,7 @@ const StyledLinkContainer = styled.div`
 `;
 
 const StyledAddDeviceLink = styled(Link)`
+  font-size: 24px;
   position: relative;
   border: solid 1px;
   border-radius: 16px 0 0 16px;
@@ -28,6 +29,7 @@ const StyledAddDeviceLink = styled(Link)`
 `;
 
 const StyledLogTempLink = styled(Link)`
+  font-size: 24px;
   position: relative;
   border: solid 1px;
   border-radius: 0 16px 16px 0;
