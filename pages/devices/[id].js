@@ -39,12 +39,14 @@ export default function Device({ devices, deleteDevice }) {
       <StyledWrapper>
         {device?.readings?.length > 0 ? (
           <>
-            <DeviceChart
-              key={device.id}
-              device={device}
-              readings={readings}
-              lastFiveReadings={lastFiveReadings}
-            />
+            <ChartContainer>
+              <DeviceChart
+                key={device.id}
+                device={device}
+                readings={readings}
+                lastFiveReadings={lastFiveReadings}
+              />
+            </ChartContainer>
 
             <StyledDeviceTemperatureBox onClick={handleAddClick}>
               {device.readings[device.readings.length - 1].temperature}°
@@ -94,7 +96,10 @@ const StyledDeviceTemperatureBox = styled.button`
   margin-bottom: 20px;
 `;
 
-const StyledTableBox = styled.div``;
+const StyledTableBox = styled.div`
+  position: absolute;
+  bottom: 10%;
+`;
 const StyledTable = styled.table`
   width: 100%;
   height: 60%;
@@ -126,4 +131,11 @@ const StyledDeleteBox = styled.div`
   margin-left: 42vw;
   margin-top: 19.5vh;
   z-index: 1;
+`;
+
+const ChartContainer = styled.div`
+  position: absolute;
+  top: 32.5%;
+  width: 70%;
+  height: 20%;
 `;

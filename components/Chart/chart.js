@@ -1,6 +1,7 @@
 import React from "react";
 import moment from "moment";
 import { Line } from "react-chartjs-2";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,6 +12,14 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import styled from "styled-components";
+
+const StyledChartBox = styled.div`
+  border-radius: 10px;
+  border: 1px solid white;
+  width: 100%;
+  height: 100%;
+`;
 
 ChartJS.register(
   CategoryScale,
@@ -52,6 +61,16 @@ export default function DeviceChart({ device, readings, lastFiveReadings }) {
         display: false,
       },
     },
+
+    animations: {
+      tension: {
+        duration: 1000,
+        easing: "linear",
+        from: 1,
+        to: 0,
+        loop: false,
+      },
+    },
     scales: {
       x: {
         grid: {
@@ -83,9 +102,9 @@ export default function DeviceChart({ device, readings, lastFiveReadings }) {
   return (
     <>
       {lastFiveReadings.length > 0 && (
-        <div style={{ height: "120px", width: "240px", margin: "0px" }}>
+        <StyledChartBox>
           <Line data={data} options={options} />
-        </div>
+        </StyledChartBox>
       )}
     </>
   );
