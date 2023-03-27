@@ -10,7 +10,6 @@ export default function useLocalStorageDevices() {
     setDevices(devices ? [...devices, newDevice] : [newDevice]);
   };
 
-  //
   const deleteReading = (deviceId, readingId) => {
     const updatedDevices = devices.map((device) => {
       if (device.id === deviceId) {
