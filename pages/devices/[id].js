@@ -14,7 +14,13 @@ export default function Device({ devices, deleteDevice }) {
   const device = devices?.find((device) => device.id === id);
 
   const readings = device?.readings || [];
-  const lastFiveReadings = readings.slice(-5).reverse();
+  const lastFiveReadings = readings
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(-5)
+    .reverse();
+  const lastFiveReadingsTable = readings
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(-5);
   const handleAddClick = () => {
     router.push(`/logTempForm?deviceId=${device.id}`);
   };
@@ -60,7 +66,7 @@ export default function Device({ devices, deleteDevice }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {lastFiveReadings.map((reading) => (
+                  {lastFiveReadingsTable.map((reading) => (
                     <tr key={`${device.id}-${reading?.id}`}>
                       <td>{reading?.date}</td>
                       <td>{reading?.temperature} °C</td>
