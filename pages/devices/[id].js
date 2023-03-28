@@ -93,7 +93,7 @@ const StyledDeviceTemperatureBox = styled.button`
   width: 92px;
   height: 92px;
   border-radius: 50%;
-  background-color: #f0f0f0;
+  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;

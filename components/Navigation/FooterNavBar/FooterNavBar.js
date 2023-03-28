@@ -11,7 +11,8 @@ const StyledLink = styled(Link)`
   align-items: center;
   width: 33.33%;
   height: 50px;
-  color: #faf5e4;
+  color: white;
+  font-size: 40px;
 `;
 
 const FooterContainer = styled.footer`
@@ -30,10 +31,10 @@ export default function FooterNavBar() {
   return (
     <FooterContainer>
       <StyledLink href="/" aria-label="link to homepage">
-        <MdHome size={40} />
+        <MdHome />
       </StyledLink>
       <StyledLink href="/addDeviceForm" aria-label="link to add Device Form">
-        <MdAdd size={40} />
+        <MdAdd />
       </StyledLink>
     </FooterContainer>
   );

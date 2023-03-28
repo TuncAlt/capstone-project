@@ -6,7 +6,7 @@ const StyledEditButton = styled.button`
   background-color: transparent;
   border: none;
   font-size: 24px;
-  color: #faf5e4;
+  color: white;
   cursor: pointer;
 `;
 export default function DevivceEditButton({ device }) {

@@ -22,10 +22,10 @@ const StyledAddDeviceLink = styled(Link)`
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  color: ${({ isactive }) => (isactive ? "white" : "black")};
+  color: ${({ isactive }) => (isactive ? "#faf5e4" : "black")};
   width: 50%;
   height: 50px;
-  background-color: ${({ isactive }) => (isactive ? "#9fd3c7" : "#ececec")};
+  background-color: ${({ isactive }) => (isactive ? "#f8b400" : "#ececec")};
 `;
 
 const StyledLogTempLink = styled(Link)`
@@ -37,10 +37,10 @@ const StyledLogTempLink = styled(Link)`
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  color: ${({ isactive }) => (isactive ? "white" : "black")};
+  color: ${({ isactive }) => (isactive ? "#faf5e4" : "black")};
   width: 50%;
   height: 50px;
-  background-color: ${({ isactive }) => (isactive ? "#9fd3c7" : "#ececec")};
+  background-color: ${({ isactive }) => (isactive ? "#f8b400" : "#ececec")};
 `;
 
 export default function HeaderNavigation() {
