@@ -13,9 +13,7 @@ export default function DeviceDeleteButton({ deleteDevice, device }) {
     setTimeout(() => {
       setIsDeleting(false);
       setDeleteMessage(true);
-      console.log("device is getting deleted");
       setTimeout(() => {
-        console.log("device is deleted");
         deleteDevice(device.id);
         router.push("/");
       }, 1000); // wait for 1 second before navigating back to home
