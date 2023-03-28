@@ -93,9 +93,14 @@ export default function LogTemperatureForm() {
           <StyledLabel>
             <StyledInput
               type="date"
-              {...register("date", { required: true })}
+              {...register("date", {
+                required: true,
+                max: new Date().toISOString().substr(0, 10),
+              })}
             />
-            {errors.date && <StyledError>Please select a date</StyledError>}
+            {errors.date && (
+              <StyledError>Please select a valid date</StyledError>
+            )}
           </StyledLabel>
 
           <StyledLabel>

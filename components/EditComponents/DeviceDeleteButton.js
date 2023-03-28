@@ -3,11 +3,48 @@ import { useState } from "react";
 import { MdCheck, MdDelete } from "react-icons/md";
 import styled from "styled-components";
 
+export default function DeviceDeleteButton({ deleteDevice, device }) {
+  const [deleteMessage, setDeleteMessage] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const router = useRouter();
+
+  const handleDeleteDevice = (device) => {
+    setIsDeleting(true);
+    setTimeout(() => {
+      setIsDeleting(false);
+      setDeleteMessage(true);
+      setTimeout(() => {
+        deleteDevice(device.id);
+        router.push("/");
+      }, 1000); // wait for 1 second before navigating back to home
+    }, 1000); // simulate the delete process taking 2 seconds
+  };
+  return (
+    <>
+      <StyledButtonContainer disabled={isDeleting}>
+        <MdDelete onClick={() => handleDeleteDevice(device)} />
+      </StyledButtonContainer>
+      {isDeleting && (
+        <StyledProgressBarContainer>
+          <span>
+            <StyledProgressBar></StyledProgressBar>
+            device is getting deleted
+          </span>
+        </StyledProgressBarContainer>
+      )}
+      {deleteMessage && (
+        <StyledDeleteIconContainer>
+          <MdCheck size={100} />
+        </StyledDeleteIconContainer>
+      )}
+    </>
+  );
+}
 const StyledButtonContainer = styled.button`
   background-color: transparent;
   border: none;
   font-size: 24px;
-  color: #faf5e4;
+  color: white;
   cursor: pointer;
 `;
 
@@ -115,43 +152,3 @@ const StyledDeleteIconContainer = styled.div`
     }
   }
 `;
-
-export default function DeviceDeleteButton({ deleteDevice, device }) {
-  const [deleteMessage, setDeleteMessage] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const router = useRouter();
-
-  const handleDeleteDevice = (device) => {
-    setIsDeleting(true);
-    setTimeout(() => {
-      setIsDeleting(false);
-      setDeleteMessage(true);
-      console.log("device is getting deleted");
-      setTimeout(() => {
-        console.log("device is deleted");
-        deleteDevice(device.id);
-        router.push("/");
-      }, 1000); // wait for 1 second before navigating back to home
-    }, 1000); // simulate the delete process taking 2 seconds
-  };
-  return (
-    <>
-      <StyledButtonContainer disabled={isDeleting}>
-        <MdDelete onClick={() => handleDeleteDevice(device)} />
-      </StyledButtonContainer>
-      {isDeleting && (
-        <StyledProgressBarContainer>
-          <span>
-            <StyledProgressBar></StyledProgressBar>
-            device is getting deleted
-          </span>
-        </StyledProgressBarContainer>
-      )}
-      {deleteMessage && (
-        <StyledDeleteIconContainer>
-          <MdCheck size={100} />
-        </StyledDeleteIconContainer>
-      )}
-    </>
-  );
-}
