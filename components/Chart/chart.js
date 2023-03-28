@@ -1,73 +1,111 @@
-import React, { useEffect, useRef } from "react";
-import Chart from "chart.js";
+import React from "react";
+import moment from "moment";
+import { Line } from "react-chartjs-2";
 
-export default function LineChart({ devices }) {
-  const readings = devices.readings;
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import styled from "styled-components";
 
-  const chartRef = useRef();
+const StyledChartBox = styled.div`
+  border-radius: 10px;
+  border: 1px solid white;
+  width: 100%;
+  height: 100%;
+`;
 
-  useEffect(() => {
-    // Sort the readings array by date in descending order
-    readings.sort((a, b) => new Date(b.date) - new Date(a.date));
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-    // Take the first 5 readings from the sorted array
-    const last5Readings = readings.slice(0, 5);
+export default function DeviceChart({ device, readings, lastFiveReadings }) {
+  // Map the readings array to create arrays of temperature values and formatted date strings
+  const temperatures = lastFiveReadings.map((reading) => reading.temperature);
+  const dates = lastFiveReadings.map((reading) =>
+    moment(reading.date).format("MM/D")
+  );
 
-    // Map the readings array to create arrays of temperature values and formatted date strings
-    const temperatures = last5Readings.map((reading) => reading.temperature);
-    const dates = last5Readings.map((reading) =>
-      moment(reading.date).format("MMM D")
-    );
-
-    // Create a new Chart.js chart object
-    const chart = new Chart(chartRef.current, {
-      type: "line",
-      data: {
-        labels: dates,
-        datasets: [
-          {
-            label: "Temperature (°C)",
-            data: temperatures,
-            fill: false,
-            borderColor: "rgb(75, 192, 192)",
-            tension: 0.1,
-          },
-        ],
+  const data = {
+    datasets: [
+      {
+        label: null,
+        data: temperatures,
+        borderColor: "white",
+        fill: false,
       },
-      options: {
-        responsive: true,
-        plugins: {
-          title: {
-            display: true,
-            text: "Last 5 temperature readings",
-          },
-          legend: {
-            display: false,
-          },
+    ],
+    labels: dates,
+  };
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      title: {
+        display: false,
+      },
+      legend: {
+        display: false,
+      },
+    },
+
+    animations: {
+      tension: {
+        duration: 1000,
+        easing: "linear",
+        from: 1,
+        to: 0,
+        loop: false,
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false,
         },
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: "Date",
-            },
+        ticks: {
+          font: {
+            size: 12,
           },
-          y: {
-            title: {
-              display: true,
-              text: "Temperature (°C)",
-            },
-            suggestedMin: 0,
-            suggestedMax: 10,
-          },
+          color: "white",
         },
       },
-    });
+      y: {
+        grid: {
+          display: false,
+        },
 
-    return () => {
-      chart.destroy();
-    };
-  }, [readings]);
-
-  return <canvas ref={chartRef} />;
+        ticks: {
+          beginAtZero: true,
+          stepSize: 2,
+          font: {
+            size: 12,
+          },
+          color: "white",
+        },
+      },
+    },
+  };
+  return (
+    <>
+      {lastFiveReadings.length > 0 && (
+        <StyledChartBox>
+          <Line data={data} options={options} />
+        </StyledChartBox>
+      )}
+    </>
+  );
 }

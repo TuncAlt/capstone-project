@@ -207,7 +207,7 @@ export default function AddDeviceForm({ addDevice, devices, updateDevice }) {
               type="checkbox"
               value="true"
               {...register("generateData")}
-              onChange={handleToggle}
+              onToggle={handleToggle}
             />
             <CheckBoxLabel htmlFor="checkbox" />
           </CheckBoxWrapper>

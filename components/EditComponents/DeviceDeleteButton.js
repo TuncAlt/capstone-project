@@ -43,7 +43,7 @@ const StyledProgressBar = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    animation: progress 0.66s ease-in-out;
+    animation: progress 1s ease-in-out;
   }
 
   span {
@@ -60,8 +60,32 @@ const StyledProgressBar = styled.div`
     0% {
       width: 100%;
     }
+    10% {
+      width: 90%;
+    }
+    20% {
+      width: 80%;
+    }
+    20% {
+      width: 70%;
+    }
+    40% {
+      width: 60%;
+    }
     50% {
       width: 50%;
+    }
+    60% {
+      width: 40%;
+    }
+    70% {
+      width: 30%;
+    }
+    80% {
+      width: 20%;
+    }
+    90% {
+      width: 10%;
     }
     100% {
       width: 0%;
