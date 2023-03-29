@@ -63,15 +63,16 @@ export default function AddDeviceForm({ addDevice, devices, updateDevice }) {
       </StyledHeader>
       <StyledWrapper>
         <StyledFormContainer onSubmit={handleSubmit(onSubmit)}>
+          <StyledSpan>sensor</StyledSpan>
           <CheckBoxWrapper>
-            <CheckBoxLabel htmlFor="checkbox" aria-label="generate data" />
             <CheckBox
               id="checkbox"
               type="checkbox"
               value="true"
               {...register("generateData")}
-              onToggle={handleToggle}
+              onChange={handleToggle}
             />
+            <CheckBoxLabel htmlFor="checkbox" aria-label="generate data" />
           </CheckBoxWrapper>
 
           <StyledLabel htmlFor="DeviceName">
@@ -148,6 +149,13 @@ export default function AddDeviceForm({ addDevice, devices, updateDevice }) {
   );
 }
 //STYLING
+const StyledSpan = styled.span`
+  position: relative;
+  top: 3.3vh;
+  margin-left: 30%;
+  color: white;
+`;
+
 const StyledFormContainer = styled.form`
   display: flex;
   flex-direction: column;
@@ -230,8 +238,7 @@ const StyledSelectField = styled.select`
 // The ToggleSwitch(Checkbox) is copied by this example "https://codesandbox.io/s/6v7n1vr8yn?file=/src/index.js"
 const CheckBoxWrapper = styled.div`
   position: relative;
-  display: flex;
-  justify-conent: flex-end;
+  margin-left: 75%;
 `;
 const CheckBoxLabel = styled.label`
   position: absolute;
