@@ -4,6 +4,7 @@ import { MdAdd } from "react-icons/md";
 import Link from "next/link";
 import styled from "styled-components";
 import { StyledHeader } from "@/styles";
+import { useRouter } from "next/router";
 
 //Styling
 
@@ -72,10 +73,14 @@ const StyledTempLinkWrapper = styled.div`
   justify-content: flex-start;
   width: 100%;
 `;
-const StyledTempLink = styled(Link)`
+const StyledTempButton = styled.button`
   color: ${({ color }) => color};
   font-size: 24px;
   order: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 `;
 
 const StyledPTag = styled.p`
@@ -104,6 +109,10 @@ export const StyledListWrapper = styled.div`
 //Function
 
 export default function DeviceList({ devices }) {
+  const router = useRouter();
+  const handleAddClick = (deviceId) => {
+    router.push(`/logTempForm?deviceId=${deviceId}`);
+  };
   return (
     <>
       <StyledHeader>Prevento</StyledHeader>
@@ -148,11 +157,9 @@ export default function DeviceList({ devices }) {
                   ) : null}
                 </>
               ) : (
-                <StyledTempLink href="/logTempForm">
-                  <StyledTempReading>
-                    <MdAdd />
-                  </StyledTempReading>
-                </StyledTempLink>
+                <StyledTempButton onClick={() => handleAddClick(device.id)}>
+                  <MdAdd />
+                </StyledTempButton>
               )}
             </StyledLinkContainer>
           ))
