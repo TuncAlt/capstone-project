@@ -33,6 +33,7 @@ export default function Device({
   const handleSyncClick = () => {
     handleTemperatureUpdate(device);
   };
+  const isSyncBoxDisplayed = device?.generateData;
   if (!device) {
     return null;
   }
@@ -46,11 +47,15 @@ export default function Device({
       <StyledSettingsBox>
         <DevivceEditButton device={device} />
       </StyledSettingsBox>
-      <StyledDeleteBox>
+      <StyledDeleteBox isSyncBoxDisplayed={isSyncBoxDisplayed}>
         <DeviceDeleteButton deleteDevice={deleteDevice} device={device} />
       </StyledDeleteBox>
 
-      {device.generateData && <MdSync onClick={handleSyncClick} />}
+      {device.generateData && (
+        <StyledSyncBox>
+          <MdSync onClick={handleSyncClick} />
+        </StyledSyncBox>
+      )}
 
       <StyledWrapper>
         {device?.readings?.length > 0 ? (
@@ -144,8 +149,10 @@ const StyledEditBox = styled.div`
 `;
 const StyledDeleteBox = styled.div`
   position: absolute;
-  margin-left: 42vw;
-  margin-top: 19.5vh;
+  margin-left: ${({ isSyncBoxDisplayed }) =>
+    isSyncBoxDisplayed ? "62vw" : "42vw"};
+  margin-top: ${({ isSyncBoxDisplayed }) =>
+    isSyncBoxDisplayed ? "15vh" : "19.5vh"};
   z-index: 1;
 `;
 
@@ -154,4 +161,15 @@ const ChartContainer = styled.div`
   top: 32.5%;
   width: 70%;
   height: 20%;
+`;
+
+const StyledSyncBox = styled.button`
+  position: absolute;
+  margin-left: 24vw;
+  margin-top: 15vh;
+  z-index: 1;
+  font-size: 1.5rem;
+  color: white;
+  background-color: transparent;
+  border: none;
 `;
