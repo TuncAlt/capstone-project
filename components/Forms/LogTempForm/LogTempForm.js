@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import useLocalStorageState from "use-local-storage-state";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import AddFormHeader from "@/components/Navigation/HeaderNavigation";
 import { useRouter } from "next/router";
 import { uid } from "uid";
 import { MdCheck } from "react-icons/md";

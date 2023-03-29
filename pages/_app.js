@@ -11,6 +11,7 @@ export default function App({ Component, pageProps }) {
     editReading,
     deleteDevice,
     updateDevice,
+    handleTemperatureUpdate,
   ] = useLocalStorageDevices();
   return (
     <main>
@@ -27,6 +28,7 @@ export default function App({ Component, pageProps }) {
         editReading={editReading}
         deleteDevice={deleteDevice}
         updateDevice={updateDevice}
+        handleTemperatureUpdate={handleTemperatureUpdate}
       />
       <FooterNavBar />
     </main>

@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { FaExclamationTriangle } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import Link from "next/link";
@@ -122,8 +121,8 @@ export default function DeviceList({ devices }) {
             <StyledLinkContainer key={device.id}>
               <StyledTempLinkWrapper>
                 {device?.readings &&
-                device?.readings[device?.readings?.length - 1]?.temperature >
-                  0 ? (
+                device?.readings[device?.readings?.length - 1]?.temperature !=
+                  null ? (
                   <StyledTempReading>
                     {device.readings[device?.readings?.length - 1].temperature}
                     °C
@@ -136,34 +135,28 @@ export default function DeviceList({ devices }) {
                 </StyledLink>
               </StyledTempLinkWrapper>
               {device?.readings &&
-              device?.readings[device?.readings?.length - 1]?.temperature >
-                0 ? (
+              device?.readings[device?.readings?.length - 1]?.temperature !=
+                null ? (
                 <>
                   {Number(
                     device?.readings[device?.readings?.length - 1]?.temperature
-                  ) > Number(device.maxTemp) ? (
+                  ) > Number(device.maxTemp) ||
+                  Number(
+                    device?.readings[device?.readings?.length - 1]?.temperature
+                  ) < Number(device.minTemp) ? (
                     <StyledIconWrapper>
-                      {" "}
-                      <FaExclamationTriangle />
-                    </StyledIconWrapper>
-                  ) : Number(
-                      device?.readings[device?.readings?.length - 1]
-                        ?.temperature
-                    ) < Number(device.minTemp) ? (
-                    <StyledIconWrapper>
-                      {" "}
                       <FaExclamationTriangle />
                     </StyledIconWrapper>
                   ) : null}
                 </>
-              ) : (
+              ) : !device?.readings ? (
                 <StyledTempButton
                   aria-label="add temperature to device"
                   onClick={() => handleAddClick(device.id)}
                 >
                   <MdAdd />
                 </StyledTempButton>
-              )}
+              ) : null}
             </StyledLinkContainer>
           ))
         ) : (

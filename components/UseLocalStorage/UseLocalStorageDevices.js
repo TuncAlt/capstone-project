@@ -1,3 +1,4 @@
+import moment from "moment";
 import { uid } from "uid";
 import useLocalStorageState from "use-local-storage-state";
 
@@ -7,14 +8,15 @@ export default function useLocalStorageDevices() {
   // ad a new added device to the devices array
   const addDevice = (device) => {
     let newDevice;
+
     if (device.generateData) {
-      const sensorReading = Math.floor(Math.random() * 25);
+      const newDate = moment().format("YYYY-MM-DD");
+      console.log(newDate);
+      const sensorReading = Math.floor(Math.random() * 50) - 25;
       newDevice = {
         ...device,
         id: uid(),
-        readings: [
-          { date: "2023-02-03", temperature: sensorReading, id: uid() },
-        ],
+        readings: [{ date: newDate, temperature: sensorReading, id: uid() }],
       };
     } else {
       newDevice = {
@@ -67,6 +69,20 @@ export default function useLocalStorageDevices() {
     });
     setDevices(updatedDevices);
   };
+  const handleTemperatureUpdate = (device) => {
+    const newDate = moment().format("YYYY-MM-DD");
+    const newTemperature = Math.floor(Math.random() * 18) - 7.5;
+    const newReading = {
+      date: newDate,
+      temperature: newTemperature,
+      id: uid(),
+    };
+    const updatedSensorReading = {
+      ...device,
+      readings: [...device.readings, newReading],
+    };
+    updateDevice(device.id, updatedSensorReading);
+  };
 
   return [
     devices,
@@ -75,5 +91,6 @@ export default function useLocalStorageDevices() {
     editReading,
     deleteDevice,
     updateDevice,
+    handleTemperatureUpdate,
   ];
 }
