@@ -7,6 +7,7 @@ import { uid } from "uid";
 import { MdCheck } from "react-icons/md";
 import { StyledWrapper, StyledHeader } from "@/styles";
 import HeaderNavigation from "@/components/Navigation/HeaderNavigation";
+import moment from "moment";
 
 // FUNCTIONALITY
 export default function LogTemperatureForm() {
@@ -23,7 +24,7 @@ export default function LogTemperatureForm() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      date: new Date().toISOString().substr(0, 10),
+      date: moment().format("YYYY-MM-DD"),
     },
   });
 
