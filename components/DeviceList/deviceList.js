@@ -3,7 +3,7 @@ import { FaExclamationTriangle } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import Link from "next/link";
 import styled from "styled-components";
-import { StyledWrapper } from "@/styles";
+import { StyledHeader } from "@/styles";
 
 //Styling
 
@@ -48,18 +48,22 @@ const StyledLink = styled(Link)`
   color: white;
 `;
 const StyledAddLink = styled(Link)`
-  width: 60%;
-  height: 40%;
+  width: 220px;
+  position: relative;
   border-radius: 16px;
-  order: 2;
+  top: 20px;
+  border: solid white 1px;
   text-decoration: none;
+  list-style: none;
   color: white;
+  text-align: center;
+  font-size: 16px;
+  height: 44px;
   display: flex;
   justify-content: center;
-  display: flex;
-  align-conten: center;
   align-items: center;
-  text-align: center;
+  align-content: center;
+  background: #f8b400;
 `;
 
 const StyledTempLinkWrapper = styled.div`
@@ -74,14 +78,27 @@ const StyledTempLink = styled(Link)`
   order: 3;
 `;
 
-const StyledHeader = styled.h1`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const StyledPTag = styled.p`
+  font-size: 18px;
+  color: white;
+  margin: 10px 0;
   text-align: center;
-  width: 100%;
-  top: 20px;
-  color: #faf5e4;
+`;
+
+export const StyledListWrapper = styled.div`
+  background: #2c786c;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 80vw;
+  height: 75vh;
+  margin-left: 7.5%;
+  border-radius: 36px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  position: absolute;
+  overflow-y: scroll;
+  top: 13%;
 `;
 
 //Function
@@ -89,8 +106,8 @@ const StyledHeader = styled.h1`
 export default function DeviceList({ devices }) {
   return (
     <>
-      <StyledHeader>Welcome</StyledHeader>
-      <StyledWrapper>
+      <StyledHeader>Prevento</StyledHeader>
+      <StyledListWrapper>
         {devices?.length > 0 ? (
           devices.map((device) => (
             <StyledLinkContainer key={device.id}>
@@ -140,13 +157,59 @@ export default function DeviceList({ devices }) {
             </StyledLinkContainer>
           ))
         ) : (
-          <StyledAddLink href="/addDeviceForm">
-            Hello there!
-            <br />
-            Click to add a new device
-          </StyledAddLink>
+          <>
+            <StyledWelcomeHeader>Welcome to Prevento</StyledWelcomeHeader>
+            <StyledUlContainer>
+              <StyledListItem>Easy device management</StyledListItem>
+              <StyledListItem>Real-time temperature monitoring</StyledListItem>
+              <StyledListItem>
+                Customizable temperature thresholds
+              </StyledListItem>
+              <StyledListItem>Alert notifications</StyledListItem>
+              <StyledAddLink href={"/addDeviceForm"}>
+                Let&apos;s get started!
+              </StyledAddLink>
+            </StyledUlContainer>
+          </>
         )}
-      </StyledWrapper>
+      </StyledListWrapper>
     </>
   );
 }
+
+const StyledListItem = styled.li`
+  margin-bottom: 14px;
+  padding-bottom: 5px;
+  width: 220px;
+  border-radius: 16px;
+  border: solid white 1px;
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background: rgba(255, 255, 255, 0.6);
+`;
+const StyledUlContainer = styled.ul`
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  position: relative;
+  top: 20px;
+`;
+const StyledWelcomeHeader = styled.h1`
+  font-size: 36px;
+  margin: 0;
+  text-align: center;
+  color: white;
+  top: 20px;
+  position: relative;
+`;

@@ -40,7 +40,6 @@ export default function useLocalStorageDevices() {
   };
 
   const deleteDevice = (id) => {
-    console.log("Device ID:" + id);
     setDevices(devices.filter((device) => device.id !== id));
   };
 

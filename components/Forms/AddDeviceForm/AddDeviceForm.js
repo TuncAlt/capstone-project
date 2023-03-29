@@ -6,6 +6,147 @@ import { MdCheck } from "react-icons/md";
 import { StyledHeader, StyledWrapper } from "@/styles";
 import HeaderNavigation from "@/components/Navigation/HeaderNavigation";
 
+//FUNCTIONALITY
+
+export default function AddDeviceForm({ addDevice, devices, updateDevice }) {
+  const router = useRouter();
+  const { deviceId } = router.query;
+  // find the device with matching deviceId
+  const device = devices?.find((device) => device.id === deviceId);
+  const [submitMessage, setSubmitMessage] = useState(false);
+  const [isAutomatic, setIsAutomatic] = useState(device?.generateData || false);
+  // if device not found, render null
+  console.log(device);
+  //register stores value from each input field in data, has a handleSubmit Function and error handling
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
+  useEffect(() => {
+    if (device) {
+      setValue("name", device.name);
+      setValue("location", device.location);
+      setValue("type", device.type);
+      setValue("minTemp", device.minTemp);
+      setValue("maxTemp", device.maxTemp);
+      setValue("generateData", device.generateData);
+    }
+  }, [device, setValue]);
+  // toggle Function for Checkbox
+  const handleToggle = () => {
+    setIsAutomatic(!isAutomatic);
+  };
+  // on Submit -> submitted data is stored in local storage,
+  //submitMessage is getting displayed for 3 sec. after that the form is getting resetet
+  const onSubmit = (data, event) => {
+    event.target.reset();
+    if (device) {
+      updateDevice(device.id, data);
+      setSubmitMessage(true);
+    } else {
+      addDevice(data);
+      setSubmitMessage(true);
+    }
+    setSubmitMessage(true);
+    setTimeout(() => {
+      setSubmitMessage(false);
+      router.back();
+    }, 500);
+  };
+
+  return (
+    <>
+      <StyledHeader>
+        <HeaderNavigation />
+      </StyledHeader>
+      <StyledWrapper>
+        <StyledFormContainer onSubmit={handleSubmit(onSubmit)}>
+          <CheckBoxWrapper>
+            <CheckBoxLabel htmlFor="checkbox" aria-label="generate data" />
+            <CheckBox
+              id="checkbox"
+              type="checkbox"
+              value="true"
+              {...register("generateData")}
+              onToggle={handleToggle}
+            />
+          </CheckBoxWrapper>
+
+          <StyledLabel htmlFor="DeviceName">
+            <StyledInput
+              {...register("name", {
+                required: true,
+                maxLength: 20,
+              })}
+              id="DeviceName"
+              placeholder="Device Name"
+            />
+            {errors.name && (
+              <StyledError>Please type in a Device Name</StyledError>
+            )}
+          </StyledLabel>
+          <StyledLabel htmlFor="DeviceLocation">
+            <StyledInput
+              {...register("location", { required: true, maxLength: 20 })}
+              id="DeviceLocation"
+              placeholder="Device Location"
+            />
+            {errors.location && (
+              <StyledError>Pleace type in a Location</StyledError>
+            )}
+          </StyledLabel>
+          <StyledLabel>
+            <StyledSelectField {...register("type", { required: true })}>
+              <option value="Please Select Device" disabled selected>
+                Please Select Device
+              </option>
+              <option value="Refrigerator">Refrigerator</option>
+              <option value="Freezer">Freezer</option>
+              <option value="Prep Table">Prep Table</option>
+            </StyledSelectField>
+            {errors.type && (
+              <StyledError>Please select a Devicetype</StyledError>
+            )}
+          </StyledLabel>
+          <StyledLabel>
+            <StyledInput
+              type="number"
+              placeholder="min Temp"
+              {...register("minTemp", { required: true, min: -25, max: 25 })}
+            />
+            {errors.minTemp && (
+              <StyledError>
+                Please enter a temperature between -25°C and 25°C
+              </StyledError>
+            )}
+          </StyledLabel>
+          <StyledLabel>
+            <StyledInput
+              type="number"
+              placeholder="max Temp"
+              {...register("maxTemp", { required: true, min: -25, max: 25 })}
+            />
+            {errors.maxTemp && (
+              <StyledError>
+                Please enter a temperature between -25°C and 25°C
+              </StyledError>
+            )}
+          </StyledLabel>
+          <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
+          {submitMessage && (
+            <StyledSubmitMessage aria-live="assertive">
+              <StyledSubmit>
+                <MdCheck />
+              </StyledSubmit>
+            </StyledSubmitMessage>
+          )}
+        </StyledFormContainer>
+      </StyledWrapper>
+    </>
+  );
+}
 //STYLING
 const StyledFormContainer = styled.form`
   display: flex;
@@ -144,144 +285,3 @@ const StyledSubmitMessage = styled.div`
   font-size: 36px;
   color: green;
 `;
-//FUNCTIONALITY
-
-export default function AddDeviceForm({ addDevice, devices, updateDevice }) {
-  const router = useRouter();
-  const { deviceId } = router.query;
-  // find the device with matching deviceId
-  const device = devices?.find((device) => device.id === deviceId);
-  const [submitMessage, setSubmitMessage] = useState(false);
-  const [isAutomatic, setIsAutomatic] = useState(device?.generateData || false);
-  // if device not found, render null
-  console.log(device);
-  //register stores value from each input field in data, has a handleSubmit Function and error handling
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm();
-  useEffect(() => {
-    if (device) {
-      setValue("name", device.name);
-      setValue("location", device.location);
-      setValue("type", device.type);
-      setValue("minTemp", device.minTemp);
-      setValue("maxTemp", device.maxTemp);
-      setValue("generateData", device.generateData);
-    }
-  }, [device, setValue]);
-  // toggle Function for Checkbox
-  const handleToggle = () => {
-    setIsAutomatic(!isAutomatic);
-  };
-  // on Submit -> submitted data is stored in local storage,
-  //submitMessage is getting displayed for 3 sec. after that the form is getting resetet
-  const onSubmit = (data, event) => {
-    event.target.reset();
-    if (device) {
-      updateDevice(device.id, data);
-      setSubmitMessage(true);
-    } else {
-      addDevice(data);
-      setSubmitMessage(true);
-    }
-    setSubmitMessage(true);
-    setTimeout(() => {
-      setSubmitMessage(false);
-      router.back();
-    }, 500);
-  };
-
-  return (
-    <>
-      <StyledHeader>
-        <HeaderNavigation />
-      </StyledHeader>
-      <StyledWrapper>
-        <StyledFormContainer onSubmit={handleSubmit(onSubmit)}>
-          <CheckBoxWrapper>
-            <CheckBox
-              id="checkbox"
-              type="checkbox"
-              value="true"
-              {...register("generateData")}
-              onToggle={handleToggle}
-            />
-            <CheckBoxLabel htmlFor="checkbox" />
-          </CheckBoxWrapper>
-
-          <StyledLabel htmlFor="DeviceName">
-            <StyledInput
-              {...register("name", {
-                required: true,
-                maxLength: 20,
-              })}
-              id="DeviceName"
-              placeholder="Device Name"
-            />
-            {errors.name && (
-              <StyledError>Please type in a Device Name</StyledError>
-            )}
-          </StyledLabel>
-          <StyledLabel htmlFor="DeviceLocation">
-            <StyledInput
-              {...register("location", { required: true, maxLength: 20 })}
-              id="DeviceLocation"
-              placeholder="Device Location"
-            />
-            {errors.location && (
-              <StyledError>Pleace type in a Location</StyledError>
-            )}
-          </StyledLabel>
-          <StyledLabel>
-            <StyledSelectField {...register("type", { required: true })}>
-              <option value="Please Select Device" disabled selected>
-                Please Select Device
-              </option>
-              <option value="Refrigerator">Refrigerator</option>
-              <option value="Freezer">Freezer</option>
-              <option value="Prep Table">Prep Table</option>
-            </StyledSelectField>
-            {errors.type && (
-              <StyledError>Please select a Devicetype</StyledError>
-            )}
-          </StyledLabel>
-          <StyledLabel>
-            <StyledInput
-              type="number"
-              placeholder="min Temp"
-              {...register("minTemp", { required: true, min: -25, max: 25 })}
-            />
-            {errors.minTemp && (
-              <StyledError>
-                Please enter a temperature between -25°C and 25°C
-              </StyledError>
-            )}
-          </StyledLabel>
-          <StyledLabel>
-            <StyledInput
-              type="number"
-              placeholder="max Temp"
-              {...register("maxTemp", { required: true, min: -25, max: 25 })}
-            />
-            {errors.maxTemp && (
-              <StyledError>
-                Please enter a temperature between -25°C and 25°C
-              </StyledError>
-            )}
-          </StyledLabel>
-          <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
-          {submitMessage && (
-            <StyledSubmitMessage>
-              <StyledSubmit>
-                <MdCheck />
-              </StyledSubmit>
-            </StyledSubmitMessage>
-          )}
-        </StyledFormContainer>
-      </StyledWrapper>
-    </>
-  );
-}
