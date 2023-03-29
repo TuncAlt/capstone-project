@@ -17,7 +17,10 @@ export default function DevivceEditButton({ device }) {
 
   return (
     <>
-      <StyledEditButton onClick={handleEditClick}>
+      <StyledEditButton
+        aria-label="device settings button"
+        onClick={handleEditClick}
+      >
         <MdSettings />
       </StyledEditButton>
     </>

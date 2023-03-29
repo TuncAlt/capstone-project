@@ -16,7 +16,6 @@ export default function AddDeviceForm({ addDevice, devices, updateDevice }) {
   const [submitMessage, setSubmitMessage] = useState(false);
   const [isAutomatic, setIsAutomatic] = useState(device?.generateData || false);
   // if device not found, render null
-  console.log(device);
   //register stores value from each input field in data, has a handleSubmit Function and error handling
   const {
     register,

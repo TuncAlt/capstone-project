@@ -157,7 +157,10 @@ export default function DeviceList({ devices }) {
                   ) : null}
                 </>
               ) : (
-                <StyledTempButton onClick={() => handleAddClick(device.id)}>
+                <StyledTempButton
+                  aria-label="add temperature to device"
+                  onClick={() => handleAddClick(device.id)}
+                >
                   <MdAdd />
                 </StyledTempButton>
               )}

@@ -103,8 +103,8 @@ const StyledDeviceTemperatureBox = styled.button`
 `;
 
 const StyledTableBox = styled.div`
-  position: absolute;
-  bottom: 10%;
+  position: fixed;
+  top: 55%;
 `;
 const StyledTable = styled.table`
   width: 100%;
