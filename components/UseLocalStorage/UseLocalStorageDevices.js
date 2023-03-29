@@ -6,7 +6,22 @@ export default function useLocalStorageDevices() {
 
   // ad a new added device to the devices array
   const addDevice = (device) => {
-    const newDevice = { ...device, id: uid() };
+    let newDevice;
+    if (device.generateData) {
+      const sensorReading = Math.floor(Math.random() * 25);
+      newDevice = {
+        ...device,
+        id: uid(),
+        readings: [
+          { date: "2023-02-03", temperature: sensorReading, id: uid() },
+        ],
+      };
+    } else {
+      newDevice = {
+        ...device,
+        id: uid(),
+      };
+    }
     setDevices(devices ? [...devices, newDevice] : [newDevice]);
   };
 
