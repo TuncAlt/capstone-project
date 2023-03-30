@@ -1,38 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div>
+  <h1>Prevento</h1>
+  <p>Prevento is a web application designed to help users monitor and manage their cooling devices. With Prevento, users can track the temperature of their devices, set temperature thresholds, and receive alerts when a device's temperature exceeds those thresholds. Users can also log new temperature readings for their devices, and add new devices to their account.</p>
+  <h2>Tech Stack</h2>
+  <p>Prevento is built with the following technologies:</p>
+  <ul>
+    <li>React</li>
+    <li>Next.js</li>
+    <li>styled-components</li>
+    <li>react-chartjs-2</li>
+    <li>react-hook-form</li>
+    <li>Jest</li>
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  </ul>
+  <h2>Getting Started</h2>
+  <ol>
+    <li>Clone the repository: <code>git clone https://github.com/yourusername/prevento.git</code></li>
+    <li>Navigate into the project directory: <code>cd prevento</code></li>
+    <li>Install dependencies: <code>npm install</code></li>
+    <li>Start the development server: <code>npm run dev</code></li>
+    <li>Open <a href="http://localhost:3000">http://localhost:3000</a> in your browser.</li>
+  </ol>
+  <h2>Usage</h2>
+  <p>After starting the development server, you will be directed to the landing page where you will be greeted by a welcome message. If you do not have any devices yet, you can click on the "Let's get started!" link to add a device. If you have already added devices, they will be displayed on the page along with their names and the most recent temperature reading. If a device's temperature reading exceeds its temperature threshold, an exclamation triangle icon will appear next to the device's name. You can simply add a new device by clicking the add button on the navigation bar.</p>
+</div>
+<h2>Prototyping & Design Stack:</h2>
+<ul>
+    <li>Figma</li>
+  </ul>
+<h2>Prototype</h2>
+<a href="capstone-project-ovpz97j2e-tuncalt.vercel.app" >Prevento</a>
