@@ -2,12 +2,12 @@ import { useForm } from "react-hook-form";
 import useLocalStorageState from "use-local-storage-state";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import AddFormHeader from "@/components/Navigation/HeaderNavigation";
 import { useRouter } from "next/router";
 import { uid } from "uid";
 import { MdCheck } from "react-icons/md";
 import { StyledWrapper, StyledHeader } from "@/styles";
 import HeaderNavigation from "@/components/Navigation/HeaderNavigation";
+import moment from "moment";
 
 // FUNCTIONALITY
 export default function LogTemperatureForm() {
@@ -24,7 +24,7 @@ export default function LogTemperatureForm() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      date: new Date().toISOString().substr(0, 10),
+      date: moment().format("YYYY-MM-DD"),
     },
   });
 

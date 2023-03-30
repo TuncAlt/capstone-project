@@ -18,7 +18,10 @@ export default function TemperatureEdit({ device }) {
 
   return (
     <>
-      <StyledEditButton onClick={handleEditClick}>
+      <StyledEditButton
+        aria-label="temperature edit button"
+        onClick={handleEditClick}
+      >
         <MdEdit />
       </StyledEditButton>
     </>

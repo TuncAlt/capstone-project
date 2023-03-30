@@ -21,7 +21,10 @@ export default function DeviceDeleteButton({ deleteDevice, device }) {
   };
   return (
     <>
-      <StyledButtonContainer disabled={isDeleting}>
+      <StyledButtonContainer
+        aria-label="device delete button"
+        disabled={isDeleting}
+      >
         <MdDelete onClick={() => handleDeleteDevice(device)} />
       </StyledButtonContainer>
       {isDeleting && (

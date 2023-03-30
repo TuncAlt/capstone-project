@@ -3,11 +3,17 @@ import DeviceDeleteButton from "@/components/EditComponents/DeviceDeleteButton";
 import DevivceEditButton from "@/components/EditComponents/DeviceEditButton";
 import TemperatureEdit from "@/components/EditComponents/TemperatureEdit";
 import { StyledHeader, StyledWrapper } from "@/styles";
+import moment from "moment";
 import { useRouter } from "next/router";
-import { MdAdd } from "react-icons/md";
+import { MdAdd, MdSync } from "react-icons/md";
 import styled from "styled-components";
+import { uid } from "uid";
 
-export default function Device({ devices, deleteDevice }) {
+export default function Device({
+  devices,
+  deleteDevice,
+  handleTemperatureUpdate,
+}) {
   const router = useRouter();
   const { id } = router.query;
 
@@ -24,7 +30,10 @@ export default function Device({ devices, deleteDevice }) {
   const handleAddClick = () => {
     router.push(`/logTempForm?deviceId=${device.id}`);
   };
-
+  const handleSyncClick = () => {
+    handleTemperatureUpdate(device);
+  };
+  const isSyncBoxDisplayed = device?.generateData;
   if (!device) {
     return null;
   }
@@ -38,9 +47,15 @@ export default function Device({ devices, deleteDevice }) {
       <StyledSettingsBox>
         <DevivceEditButton device={device} />
       </StyledSettingsBox>
-      <StyledDeleteBox>
+      <StyledDeleteBox isSyncBoxDisplayed={isSyncBoxDisplayed}>
         <DeviceDeleteButton deleteDevice={deleteDevice} device={device} />
       </StyledDeleteBox>
+
+      {device.generateData && (
+        <StyledSyncBox>
+          <MdSync onClick={handleSyncClick} />
+        </StyledSyncBox>
+      )}
 
       <StyledWrapper>
         {device?.readings?.length > 0 ? (
@@ -103,8 +118,8 @@ const StyledDeviceTemperatureBox = styled.button`
 `;
 
 const StyledTableBox = styled.div`
-  position: absolute;
-  bottom: 10%;
+  position: fixed;
+  top: 55%;
 `;
 const StyledTable = styled.table`
   width: 100%;
@@ -134,8 +149,10 @@ const StyledEditBox = styled.div`
 `;
 const StyledDeleteBox = styled.div`
   position: absolute;
-  margin-left: 42vw;
-  margin-top: 19.5vh;
+  margin-left: ${({ isSyncBoxDisplayed }) =>
+    isSyncBoxDisplayed ? "62vw" : "42vw"};
+  margin-top: ${({ isSyncBoxDisplayed }) =>
+    isSyncBoxDisplayed ? "15vh" : "19.5vh"};
   z-index: 1;
 `;
 
@@ -144,4 +161,15 @@ const ChartContainer = styled.div`
   top: 32.5%;
   width: 70%;
   height: 20%;
+`;
+
+const StyledSyncBox = styled.button`
+  position: absolute;
+  margin-left: 24vw;
+  margin-top: 15vh;
+  z-index: 1;
+  font-size: 1.5rem;
+  color: white;
+  background-color: transparent;
+  border: none;
 `;
