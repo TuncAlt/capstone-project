@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MdHome, MdAdd, MdSearch } from "react-icons/md";
+import { MdHome, MdAdd } from "react-icons/md";
 import styled from "styled-components";
 
 const StyledLink = styled(Link)`

@@ -8,7 +8,7 @@ import {
   MdArrowBack,
 } from "react-icons/md";
 import styled from "styled-components";
-import { StyledWrapper, StyledHeader } from "@/styles";
+import { StyledWrapper, StyledHeader } from "../../styles";
 
 export default function TemperatureReadings({
   devices,
