@@ -20,7 +20,7 @@
   </ul>
   <h2>Getting Started</h2>
   <ol>
-    <li>Clone the repository: <code>git clone https://github.com/yourusername/prevento.git</code></li>
+    <li>Clone the repository: <code>git clone https://git@github.com:TuncAlt/capstone-project.git</code></li>
     <li>Navigate into the project directory: <code>cd prevento</code></li>
     <li>Install dependencies: <code>npm install</code></li>
     <li>Start the development server: <code>npm run dev</code></li>
