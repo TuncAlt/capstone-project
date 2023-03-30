@@ -1,5 +1,11 @@
 <div>
+
+
+
   <h1>Prevento</h1>
+  
+  ![Screenshot 2023-03-30 at 12 16 25](https://user-images.githubusercontent.com/64401926/228806220-be2e7a28-d366-4007-87a1-4dd9b428c01d.png)
+  
   <p>Prevento is a web application designed to help users monitor and manage their cooling devices. With Prevento, users can track the temperature of their devices, set temperature thresholds, and receive alerts when a device's temperature exceeds those thresholds. Users can also log new temperature readings for their devices, and add new devices to their account.</p>
   <h2>Tech Stack</h2>
   <p>Prevento is built with the following technologies:</p>
@@ -28,4 +34,4 @@
     <li>Figma</li>
   </ul>
 <h2>Prototype</h2>
-<a href="capstone-project-ovpz97j2e-tuncalt.vercel.app" >Prevento</a>
+<a href="http://capstone-project-ovpz97j2e-tuncalt.vercel.app" >Prevento</a>
