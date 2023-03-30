@@ -73,13 +73,15 @@ const StyledTempLinkWrapper = styled.div`
   width: 100%;
 `;
 const StyledTempButton = styled.button`
-  color: ${({ color }) => color};
+  color: white;
   font-size: 24px;
   order: 3;
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
+  background: none;
+  border: none;
 `;
 
 const StyledPTag = styled.p`
