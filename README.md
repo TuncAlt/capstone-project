@@ -34,4 +34,4 @@
     <li>Figma</li>
   </ul>
 <h2>Prototype</h2>
-<a href="http://capstone-project-ovpz97j2e-tuncalt.vercel.app" >Prevento</a>
+<a href="http://capstone-project-ovpz97j2e-tuncalt.vercel.app" >Prevento</a> <span>!note the app is designed for iPhone SE! </span>
