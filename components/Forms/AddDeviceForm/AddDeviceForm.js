@@ -38,7 +38,7 @@ export default function AddDeviceForm({ addDevice, devices, updateDevice }) {
     setIsAutomatic(!isAutomatic);
   };
   // on Submit -> submitted data is stored in local storage,
-  //submitMessage is getting displayed for 3 sec. after that the form is getting resetet
+  //submitMessage is getting displayed for 0.5 sec. after that the form is getting resetet
   const onSubmit = (data, event) => {
     event.target.reset();
     if (device) {
@@ -98,8 +98,11 @@ export default function AddDeviceForm({ addDevice, devices, updateDevice }) {
             )}
           </StyledLabel>
           <StyledLabel>
-            <StyledSelectField {...register("type", { required: true })}>
-              <option value="Please Select Device" disabled selected>
+            <StyledSelectField
+              {...register("type", { required: true })}
+              defaultValue=""
+            >
+              <option value="Please Select Device" disabled>
                 Please Select Device
               </option>
               <option value="Refrigerator">Refrigerator</option>
@@ -232,6 +235,9 @@ const StyledSelectField = styled.select`
   width: 240px;
   border-radius: 16px;
   position: relative;
+  option[disabled]:first-of-type {
+    display: none;
+  }
 `;
 
 // The ToggleSwitch(Checkbox) is copied by this example "https://codesandbox.io/s/6v7n1vr8yn?file=/src/index.js"

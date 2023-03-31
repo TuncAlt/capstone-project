@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import TemperatureReadings from "./TemperatureReadings";
 import { RouterContext } from "next/dist/shared/lib/router-context";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 
 describe("TemperatureReadings", () => {
   jest.mock("next/router", () => ({
@@ -26,7 +26,7 @@ describe("TemperatureReadings", () => {
     },
   ];
 
-  test("renders table with readings", () => {
+  test("renders table with reading", () => {
     const router = {
       query: {
         deviceId: "1fa0e97dbe8",
@@ -38,5 +38,8 @@ describe("TemperatureReadings", () => {
       </RouterContext.Provider>
     );
     expect(screen.getByRole("table")).toBeInTheDocument();
+    expect(
+      screen.getByText(new RegExp(devices[0].readings[1].temperature + "°C"))
+    ).toBeInTheDocument();
   });
 });

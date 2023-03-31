@@ -11,7 +11,6 @@ export default function useLocalStorageDevices() {
 
     if (device.generateData) {
       const newDate = moment().format("YYYY-MM-DD");
-      console.log(newDate);
       const sensorReading = Math.floor(Math.random() * 50) - 25;
       newDevice = {
         ...device,

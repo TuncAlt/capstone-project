@@ -2,6 +2,18 @@ import Link from "next/link";
 import { MdHome, MdAdd } from "react-icons/md";
 import styled from "styled-components";
 
+export default function FooterNavBar() {
+  return (
+    <FooterContainer>
+      <StyledLink href="/" aria-label="link to homepage">
+        <MdHome />
+      </StyledLink>
+      <StyledLink href="/addDeviceForm" aria-label="link to add Device Form">
+        <MdAdd />
+      </StyledLink>
+    </FooterContainer>
+  );
+}
 const StyledLink = styled(Link)`
   color: black;
   display: flex;
@@ -26,16 +38,3 @@ const FooterContainer = styled.footer`
   left: 0;
   width: 100%;
 `;
-
-export default function FooterNavBar() {
-  return (
-    <FooterContainer>
-      <StyledLink href="/" aria-label="link to homepage">
-        <MdHome />
-      </StyledLink>
-      <StyledLink href="/addDeviceForm" aria-label="link to add Device Form">
-        <MdAdd />
-      </StyledLink>
-    </FooterContainer>
-  );
-}
