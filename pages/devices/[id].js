@@ -3,11 +3,9 @@ import DeviceDeleteButton from "@/components/EditComponents/DeviceDeleteButton";
 import DevivceEditButton from "@/components/EditComponents/DeviceEditButton";
 import TemperatureEdit from "@/components/EditComponents/TemperatureEdit";
 import { StyledHeader, StyledWrapper } from "@/styles";
-import moment from "moment";
 import { useRouter } from "next/router";
 import { MdAdd, MdSync } from "react-icons/md";
 import styled from "styled-components";
-import { uid } from "uid";
 
 export default function Device({
   devices,
@@ -52,7 +50,7 @@ export default function Device({
       </StyledDeleteBox>
 
       {device.generateData && (
-        <StyledSyncBox>
+        <StyledSyncBox aria-label="get device temperature">
           <MdSync onClick={handleSyncClick} />
         </StyledSyncBox>
       )}

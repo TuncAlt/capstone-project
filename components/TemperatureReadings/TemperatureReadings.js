@@ -8,7 +8,7 @@ import {
   MdArrowBack,
 } from "react-icons/md";
 import styled from "styled-components";
-import { StyledWrapper, StyledHeader } from "@/styles";
+import { StyledWrapper, StyledHeader } from "../../styles";
 
 export default function TemperatureReadings({
   devices,
@@ -97,10 +97,11 @@ export default function TemperatureReadings({
                       <StyledButtonContainer
                         onClick={() => handleSave(device.id, reading.id)}
                       >
-                        <MdSave />
+                        <MdSave aria-label="save updated reading" />
                       </StyledButtonContainer>
                     ) : (
                       <MdEdit
+                        aria-label="edit reading"
                         onClick={() =>
                           handleEdit(reading.id, reading.temperature)
                         }
@@ -114,6 +115,7 @@ export default function TemperatureReadings({
                       </StyledButtonContainer>
                     ) : (
                       <MdDelete
+                        aria-label="delete reading"
                         onClick={() =>
                           handleDeleteReading(device.id, reading.id)
                         }
@@ -126,7 +128,7 @@ export default function TemperatureReadings({
           </StyledTable>
         </StyledTableBox>
         <StyledIconContainer>
-          <MdArrowBack onClick={() => router.back()} />
+          <MdArrowBack aria-label="go back" onClick={() => router.back()} />
         </StyledIconContainer>
       </StyledWrapper>
     </>
